@@ -2,7 +2,6 @@
 
 class Director
   def initialize
-    #@map = Sprite.new(0, 0, Image.load("./images/sea.jpg"))
     @map = Map.new
 
     @player_img = Image.load("./images/player.png")
@@ -15,8 +14,6 @@ class Director
 
     @enemies = []
     @enemy_count = 0
-
-    # add_enemies(300, Configure::INIT_ENEMY_NUMBER)
   end
 
   def add_enemies(bounds_y, num = 10)

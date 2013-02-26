@@ -13,12 +13,10 @@ class Enemy < Sprite
       self.y += 1 
       self.y -= 1 if (@count_update %2 == 0 && self.y >= @seafront) #海岸線を超えたら遅くする   
     end
-    
 
     if self.y >= Window.height - self.image.height
       @stopped = true
     end
-
     @count_update += 1
   end
 
