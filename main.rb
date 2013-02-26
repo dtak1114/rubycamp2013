@@ -17,8 +17,8 @@ rescue => e
 end
 
 # Window height & width
-Window.width  = 800
-Window.height = 600
+Window.width  = Configure::WINDOW_WIDTH
+Window.height = Configure::WINDOW_HEIGHT
 
 director = Director.new
 
