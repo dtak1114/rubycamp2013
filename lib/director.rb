@@ -10,16 +10,19 @@ class Director
     @enemy_img = Image.load("./images/enemy.png")
     @enemy_img.setColorKey([0, 0, 0])
 
-    @player = Player.new(400, 500, @player_img)
+    @player = Player.new(Configure::PLAYER_INIT_X, Configure::PLAYER_INIT_Y, @player_img)
     @player.director = self
 
     @enemies = []
-    add_enemies(300)
+    @enemy_count = 0
+
+    # add_enemies(300, Configure::INIT_ENEMY_NUMBER)
   end
 
   def add_enemies(bounds_y, num = 10)
     num.times do
-      @enemies << Enemy.new(rand(800), rand(bounds_y), @enemy_img)
+      @enemies << Enemy.new(rand(Configure::WINDOW_WIDTH), rand(bounds_y), @enemy_img)
+      @enemy_count += 1
     end
   end
 
@@ -39,6 +42,9 @@ class Director
 
     @player.draw
 
-    add_enemies(50, 1) if rand(50) == 2
+    if @enemy_count < Configure::MAX_ENEMY_NUMBER
+      add_enemies(50, 1) if ( rand(50) == 2 )
+    end
   end
+
 end
