@@ -22,6 +22,7 @@ Window.height = Configure::WINDOW_HEIGHT
 
 director = Director.new
 
+
 Window.loop do
   break if Input.keyPush?(K_ESCAPE)
 
