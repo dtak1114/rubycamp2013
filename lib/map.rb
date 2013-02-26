@@ -11,8 +11,6 @@ class Map
     @map_y = 0
     update_view_port
 
-    #海岸の画像の設定
-    #@land.img = Sprite.new(0, 0, Image.load("./images/beach.jpg"))
   end
 
   def update_view_port

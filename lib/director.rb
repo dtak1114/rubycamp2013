@@ -2,8 +2,10 @@
 
 class Director
   def initialize
-    #@map = Sprite.new(0, 0, Image.load("./images/sea.jpg"))
     @map = Map.new
+
+    #海岸の画像の設定
+    @land_img = Sprite.new(0, 350, Image.load("./images/beach.jpg"))
 
     @player_img = Image.load("./images/player.png")
     @player_img.setColorKey([0, 0, 0])
@@ -33,7 +35,7 @@ class Director
   def play
     @map.scroll
     @map.draw
-    #@land.draw
+    @land_img.draw
     Sprite.update(@enemies)
     Sprite.draw(@enemies)
     Sprite.clean(@enemies)
