@@ -33,6 +33,7 @@ class Director
   def play
     @map.scroll
     @map.draw
+    #@land.draw
     Sprite.update(@enemies)
     Sprite.draw(@enemies)
     Sprite.clean(@enemies)
