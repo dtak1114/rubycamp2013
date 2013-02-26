@@ -1,14 +1,17 @@
-# coding: Shift_JIS
+# coding: utf-8
 
 class Bullet < Sprite
   attr_accessor :stopped
+  def initialize( x=0, y=0, image=nil) 
+    super
+  end
 
-  def self.checker(bullets, img)
-	if Input.keyPush?(K_SPACE)
-		return bullets << new(500, 250, img)
-	else
-		return bullets
-	end
+  def self.checker(bullets, img, player_loc_x, player_loc_y)
+  	if Input.keyPush?(K_SPACE)
+  		return bullets << new(player_loc_x, player_loc_y, img)
+  	else
+  		return bullets
+  	end
   end
 
   def update
@@ -23,7 +26,6 @@ class Bullet < Sprite
     return @vanished
   end
 
-  # 他のオブジェクトから衝突された際に呼ばれるメソッド
   def hit(obj)
     @vanished = true unless @stopped
   end
