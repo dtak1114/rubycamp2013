@@ -8,6 +8,8 @@ require_relative 'config'
 require_relative 'lib/director'
 require_relative 'lib/player'
 require_relative 'lib/enemy'
+require_relative 'lib/map'
+require_relative 'lib/map_obj'
 
 # Logger settings
 begin
