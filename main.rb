@@ -2,6 +2,7 @@
 
 require 'dxruby'
 
+require_relative 'configure/configure'
 require_relative 'lib/director'
 require_relative 'lib/player'
 require_relative 'lib/enemy'
