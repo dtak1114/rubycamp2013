@@ -4,16 +4,16 @@ class MapObj < Sprite
   attr_accessor :map, :abs_x, :abs_y
 
   def update
-    if @map.map_img.height - @map.map_y >= Window.height
-      self.y = @abs_y - @map.map_y
+    if @map.map_img.width - @map.map_x >= Window.width
+      self.x = @abs_x - @map.map_x
     else
-      if (@map.map_y .. @map.map_img.height).include?(@abs_y)
-        self.y = @abs_y - @map.map_y
+      if (@map.map_x .. @map.map_img.width).include?(@abs_x)
+        self.x = @abs_x - @map.map_x
       else
-        self.y = @abs_y + @map.view_port.height
+        self.x = @abs_x + @map.view_port.width
       end
     end
-    self.x = @abs_x - @map.map_x
+    self.y = @abs_y - @map.map_y
   end
 
   def hit(obj)
