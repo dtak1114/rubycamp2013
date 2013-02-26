@@ -2,7 +2,8 @@
 
 class Director
   def initialize
-    @map = Sprite.new(0, 0, Image.load("./images/map.png"))
+    #@map = Sprite.new(0, 0, Image.load("./images/sea.jpg"))
+    @map = Map.new
 
     @player_img = Image.load("./images/player.png")
     @player_img.setColorKey([0, 0, 0])
@@ -27,8 +28,8 @@ class Director
   end
 
   def play
+    @map.scroll
     @map.draw
-
     Sprite.update(@enemies)
     Sprite.draw(@enemies)
     Sprite.clean(@enemies)

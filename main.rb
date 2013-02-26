@@ -6,6 +6,8 @@ require_relative 'configure/configure'
 require_relative 'lib/director'
 require_relative 'lib/player'
 require_relative 'lib/enemy'
+require_relative 'lib/map'
+require_relative 'lib/map_obj'
 
 Window.width  = 800
 Window.height = 600
