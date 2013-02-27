@@ -2,20 +2,29 @@
 
 class Player < Sprite
   attr_accessor :director
-
+  def initialize(*)
+    super
+    @pushed = 2
+  end
   def update
-    @dx = Input.x 
-    @dy = Input.y
+    @dx = Input.x
     self.x += @dx
-    self.y += @dy
     self.x -= @dx unless (0..Window.width - self.image.width).include?(self.x)
-    self.y -= @dy unless (0..Window.height - self.image.height).include?(self.y)
+    @pushed = @pushed += 1 if (Input.keyPush?(K_F) && @pushed < 3)
+    @pushed = @pushed -= 1 if (Input.keyPush?(K_W) && @pushed > 1)
+    case @pushed
+      when 1
+          self.angle = -45
+      when 2
+          self.angle = 0
+      when 3
+          self.angle = 45
+      end
   end
 
   def shot(obj)
     if obj.is_a?(Enemy) && obj.stopped
       self.x -= @dx
-      self.y -= @dy
     end
   end
 end

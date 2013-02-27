@@ -19,3 +19,4 @@ doc/
 
 #macosx indexfile
 */.DS_Store
+*/.log
