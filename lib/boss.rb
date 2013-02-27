@@ -1,17 +1,19 @@
 # coding: utf-8
 
-class Enemy < Sprite
+class Boss < Enemy
   attr_accessor :stopped
   def initialize( x=0, y=0, image=nil) 
     super
-    @seafront = Configure::SEAFRONT_THRESHOLD #海岸線を暫定的に決定　
+    @seafront = Configure::SEAFRONT_THRESHOLD #海岸線を決定　
     @count_update = 0 #updateを行った回数を数える   
-    @move_v = rand(10) - 5
+    @move_v = 0
   end
 
   def update()
     unless @stopped #移動の処理
-      
+      if @count_update % 60 == 0 #once in a second
+        @move_v = rand(10) - 5  #移動速度の変化
+      end
       #移動
       @move_v *= -1 if (self.x <= 0 || self.x > Configure::WINDOW_WIDTH - Configure::ENEMY_IMG_WIDTH)
 
@@ -25,7 +27,7 @@ class Enemy < Sprite
     end
 
     if self.y >= Window.height - self.image.height
-      @vanished = true
+      @stopped = true
     end
     @count_update += 1
   end
@@ -37,16 +39,4 @@ class Enemy < Sprite
   def hit(obj)
     @vanished = true unless @stopped
   end
-
-  def self.arrive(enemies)
-    enemies.each do |enemy|
-      if enemy.y == 550
-        puts Player.getdamege
-        if Player.getdamege <= 0
-          puts "gemeover"
-        end
-      end      
-    end
-  end
-
 end
