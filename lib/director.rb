@@ -41,7 +41,9 @@ class Director
 
   def check_collision
     #hit 
-    Sprite.check(@bullets, @enemies)
+    if Sprite.check(@bullets, @enemies) 
+      @score.point += 1
+    end
   end
 
   def play
