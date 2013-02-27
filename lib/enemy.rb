@@ -27,7 +27,7 @@ class Enemy < Sprite
     end
 
     if self.y >= Window.height - self.image.height
-      @stopped = true
+      @vanished = true
     end
     @count_update += 1
   end
@@ -39,4 +39,16 @@ class Enemy < Sprite
   def hit(obj)
     @vanished = true unless @stopped
   end
+
+  def self.arrive(enemies)
+    enemies.each do |enemy|
+      if enemy.y == 550
+        puts Player.getdamege
+        if Player.getdamege <= 0
+          puts "gemeover"
+        end
+      end      
+    end
+  end
+
 end
