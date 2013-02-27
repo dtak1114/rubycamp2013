@@ -10,6 +10,7 @@ class Director
     #湖の画像の設定
     @lake_img = Sprite.new(Configure::LAKE_IMG_X, Configure::LAKE_IMG_Y, Image.load("./images/lake.jpg"))
 
+
     @player_img = Image.load("./images/player.png")
     @player_img.setColorKey([0, 0, 0])
     @enemy_img = Image.load("./images/enemy.png")
@@ -70,6 +71,10 @@ class Director
 
     if @enemy_count < Configure::MAX_ENEMY_NUMBER
       add_enemies(50, 1) if ( rand(50) == 2 )
+    end
+
+    if Input.key_push? K_B
+      Explode.play(@player.x,@player.y)
     end
 
   end
