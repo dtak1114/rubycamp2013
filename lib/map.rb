@@ -5,7 +5,9 @@ class Map
 
   def initialize
     @scroll_speed = 1 # マップのスクロールスピード
-    @map_img = Image.load("./images/sea.jpg") #海の背景画像の設定
+    @map_img = Image.load("./images/sea.jpg") # 初期ステージの背景画像の設定
+    @map_stage2_img = Image.load("./images/sea2.jpg") # 第２ステージの海の背景画像の設定
+    @map_stage3_img = Image.load("./images/sea3.jpg") # 第３ステージの海の背景画像の設定
 
     @map_x = @map_img.width - Window.width
     @map_y = 0
@@ -44,4 +46,15 @@ class Map
     Sprite.update(@map_objects)
     Sprite.draw(@map_objects)
   end
+  
+  def change_stage2
+    @map_img = @map_stage2_img
+    update_view_port
+  end
+
+  def change_stage3
+    @map_img = @map_stage3_img
+    update_view_port
+  end
+
 end

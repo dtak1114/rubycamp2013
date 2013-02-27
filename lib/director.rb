@@ -5,6 +5,8 @@ class Director
     @map = Map.new
     @score = Score.new
 
+    @score.map = self
+
     #海岸の画像の設定
     @land = Sprite.new(Configure::LAND_IMG_X, Configure::LAND_IMG_Y, Image.load("./images/beach.jpg"))
     #湖の画像の設定
@@ -57,9 +59,9 @@ class Director
   end
 
   def play
-    #refresh per frame 
+    # refresh per frame 
 
-    #background initialize
+    # background initialize
     @map.scroll
     @map.draw
     @land.draw
@@ -78,8 +80,10 @@ class Director
     @player.update
     check_collision
 
+    # background-change handle
     Enemy.arrive(@enemies)
-
+    @score.next_stage(@map)
+    
     @player.draw
 
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
