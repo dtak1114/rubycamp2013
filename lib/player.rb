@@ -10,14 +10,14 @@ class Player < Sprite
     @dx = Input.x
     self.x += @dx
     self.x -= @dx unless (0..Window.width - self.image.width).include?(self.x)
-    @pushed = @pushed += 1 if (Input.keyPush?(K_F) && @pushed < 3)
-    @pushed = @pushed -= 1 if (Input.keyPush?(K_W) && @pushed > 1)
+    @pushed = @pushed += 1 if (Input.keyPush?(K_D) && @pushed < 3)#¶‚ÉŒX‚­
+    @pushed = @pushed -= 1 if (Input.keyPush?(K_A) && @pushed > 1)#‰E‚ÉŒX‚­
     case @pushed
       when 1
           self.angle = -45
       when 2
           self.angle = 0
-      when 3
+      when
           self.angle = 45
       end
   end
