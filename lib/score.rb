@@ -13,7 +13,7 @@ class Score
   end
 
   def next_stage(map)
-  	# puts "next_stage"
+  	# background_change handle
   	if 1 <= @point && @point <= 5
   		map.change_stage2
   	elsif 6 <= @point
