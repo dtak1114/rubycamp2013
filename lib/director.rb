@@ -38,12 +38,6 @@ class Director
     end
   end
 
-  def add_bullets(bounds_y, num = 10)
-    num.times do
-      @bullets << Bullet.new(rand(Configure::WINDOW_WIDTH - @bullet_img.width), rand(bounds_y), @bullet_img)
-    end
-  end
-
   def check_collision
     #hit 
     if Sprite.check(@bullets, @enemies) 
@@ -85,7 +79,7 @@ class Director
 
     @player.draw
 
-    @bullet = Bullet.checker(@bullets,@bullet_img,@player.x,@player.y)
+    Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
 
     if @enemy_count < Configure::MAX_ENEMY_NUMBER
       add_enemies(50, 1) if ( rand(50) == 2 )
