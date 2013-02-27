@@ -33,9 +33,6 @@ Scene.add_scene(:ending, ending)
 Scene.set_scene(:title)
 log.info("Game started!")
 
-
-
-
 # Window height & width
 Window.width  = Configure::WINDOW_WIDTH
 Window.height = Configure::WINDOW_HEIGHT
