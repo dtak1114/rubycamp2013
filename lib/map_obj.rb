@@ -1,4 +1,4 @@
-# coding: Shift_JIS
+# coding: utf-8
 
 class MapObj < Sprite
   attr_accessor :map, :abs_x, :abs_y
