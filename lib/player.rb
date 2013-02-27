@@ -7,7 +7,7 @@ class Player < Sprite
     @pushed = 2
   end
   def update
-    @dx = Input.x
+    @dx = Input.x * Configure::PLAYER_MOVE_SPEED
     self.x += @dx
     self.x -= @dx unless (0..Window.width - self.image.width).include?(self.x)
     @pushed = @pushed += 1 if (Input.keyPush?(K_F) && @pushed < 3)
