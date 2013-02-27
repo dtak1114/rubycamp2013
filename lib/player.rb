@@ -9,6 +9,11 @@ class Player < Sprite
     super
     @pushed = 2
     @font = Font.new(32)
+    @player_l_img = Image.load("./images/player_l.png")
+    @player_l_img.setColorKey([0, 0, 0])
+    @player_r_img = Image.load("./images/player_r.png")
+    @player_r_img.setColorKey([0, 0, 0])
+    @player_img = self.image
   end
   def update
     @dx = Input.x * Configure::PLAYER_MOVE_SPEED
@@ -18,11 +23,13 @@ class Player < Sprite
     @pushed = @pushed -= 1 if (Input.keyPush?(K_A) && @pushed > 1)#‰E‚ÉŒX‚­
     case @pushed
       when 1
-          self.angle = -45
+# ‚±‚±‚Å‰æ‘œ‚ğØ‚è‘Ö‚¦‚é
+          self.image = @player_l_img
+#          self.angle = -45
       when 2
-          self.angle = 0
-      when
-          self.angle = 45
+          self.image = @player_img
+      when 3
+          self.image = @player_r_img
       end
   end
 

@@ -15,6 +15,9 @@ class Director
 
     @player_img = Image.load("./images/player.png")
     @player_img.setColorKey([0, 0, 0])
+
+#画像を読み込んでおく
+
     @enemy_img = Image.load("./images/enemy.png")
     @enemy_img.setColorKey([0, 0, 0])
     @bullet_img = Image.load("./images/bullet.png")
