@@ -10,9 +10,6 @@ class Scene
 
   def self.set_scene(scene_name)
     @@current_scene_name = scene_name.to_sym
-    p "-------------"
-    p @@current_scene_name
-    p "-------------"
   end
 
   def self.play

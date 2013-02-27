@@ -27,14 +27,14 @@ class Director
 
   def add_enemies(bounds_y, num = 10)
     num.times do
-      @enemies << Enemy.new(rand(Configure::WINDOW_WIDTH), rand(bounds_y), @enemy_img)
+      @enemies << Enemy.new(rand(Configure::WINDOW_WIDTH - @enemy_img.width), rand(bounds_y), @enemy_img)
       @enemy_count += 1
     end
   end
 
   def add_bullets(bounds_y, num = 10)
     num.times do
-      @bullets << Bullet.new(rand(Configure::WINDOW_WIDTH), rand(bounds_y), @bullet_img)
+      @bullets << Bullet.new(rand(Configure::WINDOW_WIDTH - @bullet_img.width), rand(bounds_y), @bullet_img)
     end
   end
 

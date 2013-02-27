@@ -14,6 +14,13 @@ require_relative 'lib/bullet'
 require_relative 'lib/map'
 require_relative 'lib/map_obj'
 
+# Logger settings
+begin
+  log = Logger.new(Configure::LOG_FILE)
+rescue => e
+  log = Logger.new(STDOUT)
+end
+
 title  = Title.new
 ending = Ending.new
 director = Director.new
@@ -23,13 +30,10 @@ Scene.add_scene(:director, director)
 Scene.add_scene(:ending, ending)
 
 Scene.set_scene(:title)
+log.info("Game started!")
 
-# Logger settings
-begin
-  log = Logger.new(Configure::LOG_FILE)
-rescue => e
-  log = Logger.new(STDOUT)
-end
+
+
 
 # Window height & width
 Window.width  = Configure::WINDOW_WIDTH
