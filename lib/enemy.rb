@@ -41,9 +41,10 @@ class Enemy < Sprite
   def self.arrive(enemies)
     enemies.each do |enemy|
       if enemy.y == 550
-        puts Player.getdamege
-        if Player.getdamege <= 0
-          puts "gemeover"
+        life = Player.getdamege
+        if life <= 0
+          #ToDO: GameOver action
+          #puts "gemeover"
         end
       end      
     end

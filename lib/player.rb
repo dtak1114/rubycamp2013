@@ -2,9 +2,13 @@
 
 class Player < Sprite
   attr_accessor :director
+  # Hit-Point setting
+  @@hp = 20
+
   def initialize(*)
     super
     @pushed = 2
+    @font = Font.new(32)
   end
   def update
     @dx = Input.x
@@ -26,5 +30,10 @@ class Player < Sprite
     if obj.is_a?(Enemy) && obj.stopped
       self.x -= @dx
     end
+  end
+
+  def self.getdamege
+    @@hp -= 1
+    return @@hp
   end
 end

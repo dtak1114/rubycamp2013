@@ -58,7 +58,7 @@ class Director
     Sprite.update(@enemies)
     Sprite.draw(@enemies)
     Sprite.clean(@enemies)
-
+     
     Sprite.update(@bullets)
     Sprite.draw(@bullets)
     Sprite.clean(@bullets)
@@ -68,6 +68,8 @@ class Director
     @player.update
     check_collision
 
+    Enemy.arrive(@enemies)
+
     @player.draw
 
     @bullet = Bullet.checker(@bullets,@bullet_img,@player.x,@player.y)
@@ -75,6 +77,7 @@ class Director
     if @enemy_count < Configure::MAX_ENEMY_NUMBER
       add_enemies(50, 1) if ( rand(50) == 2 )
     end
+
   end
 
 end
