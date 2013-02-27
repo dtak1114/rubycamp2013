@@ -2,6 +2,7 @@
 
 class Bullet < Sprite
   attr_accessor :stopped
+
   def initialize( x=0, y=0, image=nil) 
     super
   end
@@ -15,8 +16,7 @@ class Bullet < Sprite
   end
 
   def update
-    self.y -= 7.5 unless @stopped
-
+    self.y -= Configure::BULLET_SPEED unless @stopped
     if self.y <= 0 - self.image.height
       @stopped = true
     end

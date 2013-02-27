@@ -7,7 +7,7 @@ class Director
     #海岸の画像の設定
     @land_img = Sprite.new(Configure::LAND_IMG_X, Configure::LAND_IMG_Y, Image.load("./images/beach.jpg"))
     #湖の画像の設定
-    @lake_img = Sprite.new(0, 550, Image.load("./images/lake.jpg"))
+    @lake_img = Sprite.new(Configure::LAKE_IMG_X, Configure::LAKE_IMG_Y, Image.load("./images/lake.jpg"))
 
     @player_img = Image.load("./images/player.png")
     @player_img.setColorKey([0, 0, 0])
@@ -23,7 +23,6 @@ class Director
     @enemy_count = 0
 
     @bullets = []
-    add_bullets(300)
   end
 
   def add_enemies(bounds_y, num = 10)
@@ -40,14 +39,16 @@ class Director
   end
 
   def check_collision
-    Sprite.check(@bullets, @enemies)
     #hit 
+    Sprite.check(@bullets, @enemies)
   end
 
   def play
+    #refresh per frame 
+
+    #background initialize
     @map.scroll
     @map.draw
-    
     @land_img.draw
     @lake_img.draw
     
