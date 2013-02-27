@@ -1,7 +1,7 @@
 # coding: utf-8
 
 class Enemy < Sprite
-  attr_accessor :stopped
+  attr_accessor :stopped, :director
   def initialize( x=0, y=0, image=nil) 
     super
     @seafront = Configure::SEAFRONT_THRESHOLD #海岸線を暫定的に決定　
@@ -41,10 +41,13 @@ class Enemy < Sprite
   def self.arrive(enemies)
     enemies.each do |enemy|
       if enemy.y == 550
-        life = Player.getdamege
-        if life <= 0
-          #ToDO: GameOver action
-          #puts "gemeover"
+        puts life = Player.decrement_life
+        # A background is changed in the amount of damages
+        if  1 <= life && life <= 5
+          enemy.director.player_is_damege        
+        elsif life <= 0
+          enemy.director.player_is_dead
+          #ToDo: GameOver action
         end
       end      
     end

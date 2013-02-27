@@ -3,7 +3,7 @@
 class Player < Sprite
   attr_accessor :director
   # Hit-Point setting
-  @@hp = 20
+  @@hp = 10
 
   def initialize(*)
     super
@@ -31,9 +31,13 @@ class Player < Sprite
       self.x -= @dx
     end
   end
-
-  def self.getdamege
-    @@hp -= 1
+=begin
+  def self.get_life
     return @@hp
   end
+=end
+  def self.decrement_life
+    @@hp -= 1
+    return @@hp    
+  end 
 end

@@ -6,9 +6,12 @@ class Director
     @score = Score.new
 
     #海岸の画像の設定
-    @land_img = Sprite.new(Configure::LAND_IMG_X, Configure::LAND_IMG_Y, Image.load("./images/beach.jpg"))
+    @land = Sprite.new(Configure::LAND_IMG_X, Configure::LAND_IMG_Y, Image.load("./images/beach.jpg"))
     #湖の画像の設定
-    @lake_img = Sprite.new(Configure::LAKE_IMG_X, Configure::LAKE_IMG_Y, Image.load("./images/lake.jpg"))
+    @lake = Sprite.new(Configure::LAKE_IMG_X, Configure::LAKE_IMG_Y, Image.load("./images/lake.jpg"))
+
+    @damege_img = Image.load("./images/lake2.jpg")
+    @death_img = Image.load("./images/lake3.jpg")
 
 
     @player_img = Image.load("./images/player.png")
@@ -29,7 +32,9 @@ class Director
 
   def add_enemies(bounds_y, num = 10)
     num.times do
-      @enemies << Enemy.new(rand(Configure::WINDOW_WIDTH - @enemy_img.width), rand(bounds_y), @enemy_img)
+      enemy  = Enemy.new(rand(Configure::WINDOW_WIDTH - @enemy_img.width), rand(bounds_y), @enemy_img)
+      enemy.director = self
+      @enemies << enemy
       @enemy_count += 1
     end
   end
@@ -41,14 +46,22 @@ class Director
     end
   end
 
+  def player_is_damege
+    @lake.image = @damege_img
+  end
+
+  def player_is_dead
+    @lake.image = @death_img
+  end
+
   def play
     #refresh per frame 
 
     #background initialize
     @map.scroll
     @map.draw
-    @land_img.draw
-    @lake_img.draw
+    @land.draw
+    @lake.draw
     
     Sprite.update(@enemies)
     Sprite.draw(@enemies)
