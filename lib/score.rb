@@ -1,6 +1,6 @@
 class Score
 
-  attr_accessor :point
+  attr_accessor :point, :map
 
   def initialize
     # score settings
@@ -10,5 +10,14 @@ class Score
 
   def draw
     Window.drawFont(50, 50, @point.to_s, @font)
+  end
+
+  def next_stage(map)
+  	# puts "next_stage"
+  	if 1 <= @point && @point <= 5
+  		map.change_stage2
+  	elsif 6 <= @point
+  		map.change_stage3
+  	end
   end
 end
