@@ -11,6 +11,7 @@ require_relative 'lib/enemy'
 require_relative 'lib/bullet'
 require_relative 'lib/map'
 require_relative 'lib/map_obj'
+require_relative 'lib/score'
 
 # Logger settings
 begin
@@ -25,9 +26,8 @@ Window.height = Configure::WINDOW_HEIGHT
 
 director = Director.new
 
-
 Window.loop do
   break if Input.keyPush?(K_ESCAPE)
-  
+
   director.play
 end

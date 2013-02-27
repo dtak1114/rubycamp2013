@@ -3,6 +3,7 @@
 class Director
   def initialize
     @map = Map.new
+    @score = Score.new
 
     #海岸の画像の設定
     @land_img = Sprite.new(Configure::LAND_IMG_X, Configure::LAND_IMG_Y, Image.load("./images/beach.jpg"))
@@ -59,6 +60,8 @@ class Director
     Sprite.update(@bullets)
     Sprite.draw(@bullets)
     Sprite.clean(@bullets)
+
+    Sprite.draw(@score)
 
     @player.update
     check_collision
