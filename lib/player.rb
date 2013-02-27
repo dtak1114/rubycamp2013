@@ -1,4 +1,4 @@
-# coding: Shift_JIS
+# coding: utf-8
 
 class Player < Sprite
   attr_accessor :director
