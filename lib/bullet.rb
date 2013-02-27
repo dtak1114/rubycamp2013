@@ -9,7 +9,7 @@ class Bullet < Sprite
 
   def self.checker(bullets, img, player_loc_x, player_loc_y)
   	if Input.keyPush?(K_SPACE)
-  		return bullets << new(player_loc_x, player_loc_y, img)
+  		return bullets << new(player_loc_x + 14, player_loc_y+6, img)
   	else
   		return bullets
   	end
