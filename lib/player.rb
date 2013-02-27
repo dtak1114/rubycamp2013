@@ -4,7 +4,7 @@ class Player < Sprite
   attr_accessor :director
 
   def update
-    @dx = Input.x
+    @dx = Input.x 
     @dy = Input.y
     self.x += @dx
     self.y += @dy
