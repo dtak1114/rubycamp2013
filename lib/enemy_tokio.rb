@@ -1,7 +1,7 @@
 # coding: utf-8
 
 class Boss < Sprite
-  attr_accessor :stopped
+  attr_accessor :stopped, :director
   def initialize( x=0, y=0, image=nil) 
     super
     @count_update = 0 #updateを行った回数を数える   
@@ -12,9 +12,9 @@ class Boss < Sprite
   def update()
     unless @stopped 
       #移動の処理
-      self.x = Math.sin((@count_update % 360) * Math::PI / 180) #八の字運動
-      self.y = Math.sin((@count_update % 360) * Math::PI / 180)
-      
+      self.x = Configure::WINDOW_WIDTH * Math.sin((@count_update % 360) * Math::PI / 180) + Configure::WINDOW_WIDTH #八の字運動
+      self.y = 50 * Math.sin((@count_update % 360) * Math::PI / 180) + 100
+    end
 
     if self.y >= Window.height - self.image.height
       @vanished = true
