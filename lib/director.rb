@@ -23,7 +23,7 @@ class Director
     @enemy_img.setColorKey([0, 0, 0])
     @bullet_img = Image.load("./images/bullet.png")
     @bullet_img.setColorKey([0, 0, 0])
-    @boss_img = Image.load("./images/boss.jpg")
+    @boss_img = Image.load("./images/tokio.png")
     @boss_img.setColorKey([0, 0, 0])
 
     @player = Player.new(Configure::PLAYER_INIT_X, Configure::PLAYER_INIT_Y, @player_img)
@@ -104,8 +104,7 @@ class Director
     end
 
     # Apper boss
-    # add_boss
-
+    add_boss if @boss.empty?
   end
 
 end
