@@ -1,7 +1,6 @@
 # coding: utf-8
 
 class Player < Sprite
-  attr_accessor :director
   # Hit-Point setting
   @@hp = 10
 
