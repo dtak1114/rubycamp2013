@@ -28,6 +28,7 @@ class Director
     @bullet_img.setColorKey([0, 0, 0])
     @boss_img = Image.load("./images/tokio.png")
     @boss_img.setColorKey([0, 0, 0])
+
     @pants_img = Image.load("./images/pants.png")
     @pants_img.setColorKey([0, 0, 0])
 
@@ -61,10 +62,6 @@ class Director
       @explode.flag = true     
       #score
       @score.point += 1
-    end
-    if Sprite.check(@pants, @boss)
-      # Clear action
-      @score.clear
     end
   end
 
@@ -125,7 +122,5 @@ class Director
 
     # Apper boss
     Boss.add_boss(self, @score.point)
-
   end
-
 end

@@ -1,9 +1,13 @@
 # coding: utf-8
 
 class Boss < Sprite
+  @@tokio_d_img = Image.load("./images/tokio_d.png")
+  @@tokio_d_img.setColorKey([0, 0, 0])
+
   attr_accessor :stopped, :director
   def initialize( x=0, y=0, image=nil) 
     super
+    @hp = Configure::BOSS_HP
     @count_update = 0 #updateを行った回数を数える   
     @move_x = rand(5) #敵のx方向の移動量
     @direction = [1, -1][rand(2)] #移動の方向
@@ -27,7 +31,16 @@ class Boss < Sprite
   end
 
   def hit(obj)
-    @vanished = true unless @stopped
+    @hp -= 1
+
+    if @hp < (Configure::BOSS_HP / 3)
+      self.image = @@tokio_d_img
+    end
+
+    if @hp.zero? && !@stopped
+      @vanished = true 
+      Score.clear
+    end
   end
 
   def self.add_boss(directer, score_point)
