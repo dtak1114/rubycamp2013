@@ -64,7 +64,7 @@ class Director
     if Sprite.check(@bullets, @enemies) 
       @score.point += 1    
     elsif Sprite.check(@bullets, @boss)
-      @score.point += 1
+      @score.clear
     end
   end
 
@@ -132,7 +132,7 @@ class Director
 
     # Apper boss
     Boss.add_boss(self, @score.point)
-    
+
   end
 
 end
