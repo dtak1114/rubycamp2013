@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class AnimeSprite < Sprite
   attr_reader :anime_sprite_count,:anime_sprite_frame_count
   

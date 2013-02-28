@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class Score
 
   attr_accessor :point, :map
