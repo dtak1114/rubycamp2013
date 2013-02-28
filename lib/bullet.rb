@@ -3,7 +3,7 @@
 class Bullet < Sprite
   attr_accessor :stopped,:direction
 
-  def initialize( x=0, y=0, image=nil, angle=0) 
+  def initialize( x, y, image=nil, angle=0) 
     super
     case angle
     when 1 
@@ -17,7 +17,7 @@ class Bullet < Sprite
 
   def self.fire(bullets, img, player_loc_x, player_loc_y,player_angle)
   	if Input.keyPush?(Configure::KEY_SHOT)
-      new_bullet = Bullet.new(player_loc_x + 14, player_loc_y + 6, img, player_angle)
+      new_bullet = self.new(player_loc_x + 65, player_loc_y + 10, img, player_angle)
   		return bullets << new_bullet 
   	end
   end

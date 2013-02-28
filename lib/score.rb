@@ -14,9 +14,9 @@ class Score
 
   def next_stage(map)
   	# background_change handle
-  	if 1 <= @point && @point < 5
+  	if Configure::CANGE_STAG_POINT_MIN <= @point && @point < Configure::CANGE_STAG_POINT_HIGHE
   		map.change_stage2
-  	elsif 5 <= @point
+  	elsif Configure::CANGE_STAG_POINT_HIGHE <= @point
   		map.change_stage3
 	end
   end

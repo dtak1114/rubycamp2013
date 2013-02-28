@@ -1,6 +1,9 @@
 # coding: utf-8
 
 class Enemy < Sprite
+  @@enemy_w_img = Image.load("./images/enemy_w.png")
+  @@enemy_w_img.setColorKey([0, 0, 0])
+
   attr_accessor :stopped, :director
   def initialize( x=0, y=0, image=nil) 
     super
@@ -8,7 +11,7 @@ class Enemy < Sprite
     @count_update = 0 #updateを行った回数を数える   
     @move_v = rand(5)
     @direction = [1, -1][rand(2)]
-    @hp = 2
+    @hp = Configure::ENEMY_HP
   end
 
   def update()
@@ -19,7 +22,7 @@ class Enemy < Sprite
         @direction = -1
       end
       @move_y = 1
-      unless ((@count_update % 2 == 0) && self.y >= @seafront) #海岸線を超えたら遅くする  
+      unless ((@count_update % 2 == 0) && (self.y >= @seafront || @hp == 1) )#海岸線を超えたら,HPが１のとき遅くする  
         self.x += (@move_v * @direction)
         self.y += @move_y
       end
@@ -37,6 +40,11 @@ class Enemy < Sprite
 
   def hit(obj)
     @hp -= 1
+
+    if  @hp == 1
+      self.image = @@enemy_w_img
+    end
+
     if @hp == 0 && !@stopped
       @vanished = true
     end

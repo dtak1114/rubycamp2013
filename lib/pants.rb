@@ -3,7 +3,7 @@
 class Pants < Sprite
   attr_accessor :stopped,:direction
 
-  def initialize( x=0, y=0, image=nil,angle=0) 
+  def initialize( x, y, image=nil, angle=0) 
     super
     case angle
     when 1 
@@ -17,7 +17,7 @@ class Pants < Sprite
 
   def self.fire(pants, img, player_loc_x, player_loc_y,player_angle, score_point)
   	if Input.keyPush?(Configure::KEY_PANTS_SHOT) && Configure::PANTS_APPEAR_POINT <= score_point
-      new_pants = Pants.new(player_loc_x + 14, player_loc_y + 6, img, player_angle)
+      new_pants = self.new(player_loc_x + 65, player_loc_y + 10, img, player_angle)
   		return pants << new_pants
   	end
   end
