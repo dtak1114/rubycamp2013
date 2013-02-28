@@ -3,7 +3,7 @@
 class Player < Sprite
   attr_accessor :angle
   # Hit-Point setting
-  @@hp = 10
+  @@hp = Configure::PLAYER_LIFE
 
   def initialize(*)
     super

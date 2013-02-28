@@ -116,6 +116,8 @@ class Director
 
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
     Airstrike.fire(@fighters)
+
+    # increment enemy
     Enemy.increment_enemies(self, @enemy_count)
 
     #explode shot
@@ -125,5 +127,10 @@ class Director
 
     # Apper boss
     Boss.add_boss(self, @score.point, @time)
+    
+    # change enemies Hit-Point
+    # p @enemies.collect{|e| e.hp }.join(", ")
+    Enemy.change_enemies_hp(@enemies || [], @score.point)
+
  end
 end

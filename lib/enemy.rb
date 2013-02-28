@@ -1,14 +1,14 @@
 # coding: utf-8
 
 class Enemy < Sprite
-  attr_accessor :stopped, :director
+  attr_accessor :stopped, :director, :hp
   def initialize( x=0, y=0, image=nil) 
     super
     @seafront = Configure::SEAFRONT_THRESHOLD #海岸線を暫定的に決定　
     @count_update = 0 #updateを行った回数を数える   
     @move_v = rand(5)
     @direction = [1, -1][rand(2)]
-    @hp = Configure::ENEMY_HP
+    @hp = Configure::ENEMY_HP_1
   end
 
   def update()
@@ -74,4 +74,23 @@ class Enemy < Sprite
       add_enemies(directer, 50, 1) if ( rand(50) == 2 )
     end
   end
+
+  def self.change_enemies_hp(enemies, score_point)
+    return if enemies.empty?
+    # ここでレベルアップかどうかを判定するといいと思います。
+    if score_point == Configure::CANGE_STAG_POINT_MIN || score_point == Configure::CANGE_STAG_POINT_HIGHE
+      enemies.each do |enemy|
+        enemy.change_enemies_hp(score_point)
+      end
+    end
+  end
+
+  def change_enemies_hp(score_point)
+    if Configure::CANGE_STAG_POINT_MIN == score_point
+      @hp = Configure::ENEMY_HP_2
+    elsif Configure::CANGE_STAG_POINT_HIGHE == score_point
+      @hp = Configure::ENEMY_HP_3
+    end
+  end
+
 end
