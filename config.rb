@@ -4,6 +4,15 @@ require "logger"
 
 class Configure
 
+	#KEY_CONFIG
+	KEY_LEAN_LEFT= K_D
+	KEY_LEAN_RIGHT = K_A
+	# KEY_MOVE_LEFT = K_H
+	# KEY_MOVE_RIGHT = K_L
+	# KEY_SHOT = K_UP
+	 KEY_SHOT = K_SPACE
+	
+
 	#LIFE and STAGE condition
 	GOAL_SCORE = 100
 	
@@ -34,9 +43,10 @@ class Configure
 	# ENEMY_MOVEMENT_WIDTH =
 
 	#Bullet
-	BULLET_POP_X = 100
-	BULLET_POP_Y = 200
 	BULLET_SPEED = 6
+
+	#Pants
+	PANTS_SPEED = 8
 	
 	#logger
 	LOG_FILE = File.dirname(__FILE__) + "log/info.log"

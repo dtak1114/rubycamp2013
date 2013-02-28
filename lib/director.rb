@@ -6,7 +6,6 @@ class Director
   def initialize
     @map = Map.new
     @score = Score.new
-
     @score.map = self
 
     # 海岸の画像の設定
@@ -18,19 +17,19 @@ class Director
 
     @damege_img = Image.load("./images/lake2.jpg")
     @death_img = Image.load("./images/lake3.jpg")
-
-
     @player_img = Image.load("./images/player.png")
+    
     @player_img.setColorKey([0, 0, 0])
-
-#画像を読み込んでおく
-
+    
+    #画像を読み込んでおく
     @enemy_img = Image.load("./images/enemy.png")
     @enemy_img.setColorKey([0, 0, 0])
     @bullet_img = Image.load("./images/bullet.png")
     @bullet_img.setColorKey([0, 0, 0])
     @boss_img = Image.load("./images/tokio.png")
     @boss_img.setColorKey([0, 0, 0])
+    @pants_img = Image.load("./images/pants.png")
+    @pants_img.setColorKey([0, 0, 0])
 
     @player = Player.new(Configure::PLAYER_INIT_X, Configure::PLAYER_INIT_Y, @player_img)
     #Player's position at the beggining of the game
@@ -47,12 +46,14 @@ class Director
     @bullets = []
 
     @boss = []
+
+    @pants = []
   
   end
 
   def check_collision
     #hit 
-    if Sprite.check(@bullets, @enemies) || Sprite.check(@bullets, @boss)
+    if Sprite.check(@bullets, @enemies) || Sprite.check(@pants, @boss)
       #explode
       @explode.x = @bullets.last.x
       @explode.y = @bullets.last.y - 50
@@ -61,7 +62,7 @@ class Director
       #score
       @score.point += 1
     end
-    if Sprite.check(@bullets, @boss)
+    if Sprite.check(@pants, @boss)
       # Clear action
       @score.clear
     end
@@ -97,6 +98,10 @@ class Director
     Sprite.draw(@boss)
     Sprite.clean(@boss)
 
+    Sprite.update(@pants)
+    Sprite.draw(@pants)
+    Sprite.clean(@pants)
+
     Sprite.draw(@score)
 
     @player.update
@@ -109,14 +114,10 @@ class Director
     @player.draw
 
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
+    Pants.fire(@pants,@pants_img,@player.x,@player.y,@player.angle)
 
     #explode shot
     @explode.update
-    if @explode.anime_sprite_count  >= ((@explode_frames.size * @explode.anime_sprite_frame_count) - 1)
-      @explode.flag = false
-    end
-    @explode.draw if @explode.flag
-
 
     #tokio pop condition....
     # add_tokio(50,1)
