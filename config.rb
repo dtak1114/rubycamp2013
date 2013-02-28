@@ -51,6 +51,7 @@ class Configure
 	#Pants
 	PANTS_SPEED = 8
 	KEY_PANTS_SHOT = K_P
+	PANTS_APPEAR_POINT = 30
 
 	#Airstrike
 	FIGHTER_SPEED = 20

@@ -11,7 +11,6 @@ class Boss < Sprite
     @count_update = 0 #updateを行った回数を数える   
     @move_x = rand(5) #敵のx方向の移動量
     @direction = [1, -1][rand(2)] #移動の方向
-    @time = Time.new
   end
 
   def update()
@@ -44,10 +43,9 @@ class Boss < Sprite
     end
   end
 
-  def self.add_boss(directer, score_point)
-    if directer.boss.empty? 
-        directer.boss << Boss.new(350, 200, directer.boss_img)
+  def self.add_boss(directer, score_point,  time)
+    if time <= Time.new && directer.boss.empty?
+        directer.boss << self.new(350, 200, directer.boss_img)
     end
   end
-
 end

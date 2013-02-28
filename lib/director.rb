@@ -6,6 +6,7 @@ class Director
   def initialize
     @map = Map.new
     @score = Score.new
+
     @score.map = self
 
     # 海岸の画像の設定
@@ -17,11 +18,13 @@ class Director
 
     @damege_img = Image.load("./images/lake2.jpg")
     @death_img = Image.load("./images/lake3.jpg")
+
+
     @player_img = Image.load("./images/player.png")
-    
     @player_img.setColorKey([0, 0, 0])
-    
-    #画像を読み込んでおく
+
+#画像を読み込んでおく
+
     @enemy_img = Image.load("./images/enemy.png")
     @enemy_img.setColorKey([0, 0, 0])
     @bullet_img = Image.load("./images/bullet.png")
@@ -46,6 +49,7 @@ class Director
     @boss = []
     @pants = []
     @fighters = []
+    @time = Time.new + 30  
   end
 
   def check_collision
@@ -111,12 +115,15 @@ class Director
     @player.draw
 
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
-    Pants.fire(@pants,@pants_img,@player.x,@player.y,@player.angle)
     Airstrike.fire(@fighters)
     Enemy.increment_enemies(self, @enemy_count)
-    Boss.add_boss(self, @score.point)
 
     #explode shot
     @explode.update
-  end
+    
+    Pants.fire(@pants, @pants_img, @player.x, @player.y, @player.angle, @score.point)
+
+    # Apper boss
+    Boss.add_boss(self, @score.point, @time)
+ end
 end
