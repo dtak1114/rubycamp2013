@@ -3,6 +3,7 @@
 class Boss < Sprite
   @@tokio_d_img = Image.load("./images/tokio_d.png")
   @@tokio_d_img.setColorKey([0, 0, 0])
+  @hit_sound = Sound.new("sound/se_mod05.wav")
 
   attr_accessor :stopped, :director
   def initialize( x=0, y=0, image=nil) 
@@ -11,7 +12,6 @@ class Boss < Sprite
     @count_update = 0 #updateを行った回数を数える   
     @move_x = rand(5) #敵のx方向の移動量
     @direction = [1, -1][rand(2)] #移動の方向
-    @hit_sound = Sound.new("sound/hit.wav")
   end
 
   def update()
