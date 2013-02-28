@@ -12,7 +12,7 @@ class Boss < Sprite
   def update()
     unless @stopped 
       #移動の処理
-      self.x = (Configure::WINDOW_WIDTH / 3) * Math.sin((@count_update % 360) * Math::PI / 180) + (Configure::WINDOW_WIDTH / 2)#八の字運動
+      self.x = (Configure::WINDOW_WIDTH / 3) * Math.sin((@count_update % 360) * Math::PI / 180) + (Configure::WINDOW_WIDTH / 2) - 60 #八の字運動
       self.y = 50 * Math.sin((@count_update % 360) * Math::PI / 180 * 2) + 100
     end
 
