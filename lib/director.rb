@@ -36,7 +36,8 @@ class Director
     @pants_img.setColorKey([0, 0, 0])
 
     #BGM
-    bgm = Sound.new("sound/bgm.mid") 
+    @bgm = Sound.new("sound/bgm.mid") 
+    #SE
 
     @player = Player.new(Configure::PLAYER_INIT_X, Configure::PLAYER_INIT_Y, @player_img)
     #Player's position at the beggining of the game
@@ -91,7 +92,7 @@ class Director
 
   def play
     # refresh per frame 
-    bgm.play
+    @bgm.play
 
     # background initialize
     @map.scroll
