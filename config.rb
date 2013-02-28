@@ -34,9 +34,10 @@ class Configure
 	# ENEMY_MOVEMENT_WIDTH =
 
 	#Bullet
-	BULLET_POP_X = 100
-	BULLET_POP_Y = 200
 	BULLET_SPEED = 6
+
+	#Pants
+	PANTS_SPEED = 8
 	
 	#logger
 	LOG_FILE = File.dirname(__FILE__) + "log/info.log"

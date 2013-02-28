@@ -19,8 +19,6 @@ class Bullet < Sprite
   	if Input.keyPush?(K_SPACE)
       new_bullet = Bullet.new(player_loc_x + 14, player_loc_y + 6, img, player_angle)
   		return bullets << new_bullet 
-  	else
-  		return bullets
   	end
   end
 
