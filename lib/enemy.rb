@@ -5,13 +5,15 @@ class Enemy < Sprite
   
   @@enemy_w_img = Image.load("./images/enemy_w.png")
   @@enemy_w_img.setColorKey([0, 0, 0])
+  @@enemy_hp = Configure::ENEMY_HP_1
+
   def initialize( x=0, y=0, image=nil) 
     super
     @seafront = Configure::SEAFRONT_THRESHOLD #海岸線を暫定的に決定　
     @count_update = 0 #updateを行った回数を数える   
     @move_v = rand(5)
     @direction = [1, -1][rand(2)]
-    @hp = Configure::ENEMY_HP_1
+    @hp = @@enemy_hp
   end
 
   def update()
@@ -76,31 +78,17 @@ class Enemy < Sprite
     end
   end
 
-  def self.increment_enemies(directer, enemy_count)
+  def self.increment_enemies(directer, enemies, enemy_count, score_point)
     if enemy_count < Configure::MAX_ENEMY_NUMBER
       add_enemies(directer, 50, 1) if ( rand(50) == 2 )
     end
   end
 
-  def self.change_enemies_hp(enemies, score_point)
-    return if enemies.empty?
-    # ここでレベルアップかどうかを判定するといいと思います。
+  def self.change_enemies_hp(score_point)
     if Configure::CANGE_STAG_POINT_MIN <= score_point && score_point < Configure::CANGE_STAG_POINT_HIGHE
-      enemies.each do |enemy|
-        enemy.change_enemies_hp(score_point)
-      end
+      @@enemy_hp = Configure::ENEMY_HP_2
     elsif Configure::CANGE_STAG_POINT_HIGHE <= score_point
-      enemies.each do |enemy|
-        enemy.change_enemies_hp2(score_point)
-      end
+      @@enemy_hp = Configure::ENEMY_HP_3
     end
-  end
-
-  def change_enemies_hp(score_point)
-      @hp = Configure::ENEMY_HP_2
-  end
-  
-  def change_enemies_hp2(score_point)
-      @hp = Configure::ENEMY_HP_3
   end
 end

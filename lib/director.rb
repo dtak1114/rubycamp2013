@@ -96,13 +96,13 @@ class Director
 
     # background-change handle
     Enemy.arrive(@enemies)
-    @score.next_stage(@map)
+    @score.next_stage(@map, @score.point)
     
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
     Bomb.fire(@bombs,@fighters)
     Airstrike.fire(@fighters)
 
-    Enemy.increment_enemies(self, @enemy_count)
+    Enemy.increment_enemies(self, @enemies, @enemy_count, @score.point)
 
     #explode shot
     @explode.update
@@ -111,10 +111,12 @@ class Director
 
     # Apper boss
     Boss.add_boss(self, @score.point, @time)
-    
+
     # change enemies Hit-Point
     # p @enemies.collect{|e| e.hp }.join(", ")
-    Enemy.change_enemies_hp(@enemies || [], @score.point)
-
+    # Enemy.change_enemies_hp(@enemies || [], @score.point)
+    if @enemies.size > 0
+    puts @enemies[0].hp
+  end
  end
 end
