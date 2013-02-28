@@ -16,7 +16,7 @@ require_relative 'lib/map_obj'
 require_relative 'lib/score'
 require_relative 'lib/explode'
 require_relative 'lib/animesprite'
-
+require_relative 'lib/boss'
 
 # Logger settings
 begin

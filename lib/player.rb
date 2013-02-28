@@ -1,7 +1,6 @@
 # coding: utf-8
 
 class Player < Sprite
-  attr_accessor :director
   # Hit-Point setting
   @@hp = 10
 
@@ -31,11 +30,7 @@ class Player < Sprite
       self.x -= @dx
     end
   end
-=begin
-  def self.get_life
-    return @@hp
-  end
-=end
+
   def self.decrement_life
     @@hp -= 1
     return @@hp    
