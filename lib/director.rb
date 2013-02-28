@@ -112,11 +112,6 @@ class Director
     # Apper boss
     Boss.add_boss(self, @score.point, @time)
 
-    # change enemies Hit-Point
-    # p @enemies.collect{|e| e.hp }.join(", ")
-    # Enemy.change_enemies_hp(@enemies || [], @score.point)
-    if @enemies.size > 0
-    puts @enemies[0].hp
   end
  end
 end
