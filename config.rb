@@ -9,8 +9,8 @@ class Configure
 	KEY_LEAN_RIGHT = K_A
 	KEY_MOVE_LEFT = K_H
 	KEY_MOVE_RIGHT = K_L
-	KEY_SHOT = K_UP
-	# KEY_SHOT = K_SPACE
+	# KEY_SHOT = K_UP
+	 KEY_SHOT = K_SPACE
 	
 
 	#LIFE and STAGE condition
