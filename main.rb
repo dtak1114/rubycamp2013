@@ -18,6 +18,7 @@ require_relative 'lib/score'
 require_relative 'lib/explode'
 require_relative 'lib/animesprite'
 require_relative 'lib/boss'
+require_relative 'lib/pants'
 
 # Logger settings
 begin

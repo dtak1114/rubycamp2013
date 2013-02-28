@@ -1,24 +1,24 @@
 # coding: utf-8
 
-class Bullet < Sprite
+class Pants < Sprite
   attr_accessor :stopped,:direction
 
-  def initialize( x=0, y=0, image=nil, angle=0) 
+  def initialize( x=0, y=0, image=nil,angle=0) 
     super
     case angle
-    when 1 
+    when -45
       @direction = :left
-    when 3 
+    when 45
       @direction = :right
     else 
       @direction = :straight
     end
   end
 
-  def self.fire(bullets, img, player_loc_x, player_loc_y,player_angle)
-  	if Input.keyPush?(Configure::KEY_SHOT)
-      new_bullet = Bullet.new(player_loc_x + 14, player_loc_y + 6, img, player_angle)
-  		return bullets << new_bullet 
+  def self.fire(pants, img, player_loc_x, player_loc_y,player_angle)
+  	if Input.keyPush?(K_P)
+      new_pants = Pants.new(player_loc_x + 14, player_loc_y + 6, img, player_angle)
+  		return pants << new_pants
   	end
   end
 
@@ -28,17 +28,17 @@ class Bullet < Sprite
       when :left
         #left
         self.angle = -45
-        self.y -= Configure::BULLET_SPEED
-        self.x -= Configure::BULLET_SPEED
+        self.y -= Configure::PANTS_SPEED
+        self.x -= Configure::PANTS_SPEED
       when :right
         #right
         self.angle = 45
-        self.y -= Configure::BULLET_SPEED
-        self.x += Configure::BULLET_SPEED
+        self.y -= Configure::PANTS_SPEED
+        self.x += Configure::PANTS_SPEED
       else 
         #straight
         self.angle = 0
-        self.y -= Configure::BULLET_SPEED
+        self.y -= Configure::PANTS_SPEED
       end
     end 
 
