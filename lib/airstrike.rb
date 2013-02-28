@@ -28,10 +28,6 @@ end
 
 class Bomb < Airstrike
 
-	def initialize
-		super	
-	end
-
 	def update
 		self.y += Configure::BOMB_FALLDOWN_SPEED
 	end
