@@ -2,6 +2,9 @@
 
 class Enemy < Sprite
   attr_accessor :stopped, :director, :hp
+  
+  @@enemy_w_img = Image.load("./images/enemy_w.png")
+  @@enemy_w_img.setColorKey([0, 0, 0])
   def initialize( x=0, y=0, image=nil) 
     super
     @seafront = Configure::SEAFRONT_THRESHOLD #海岸線を暫定的に決定　
@@ -19,7 +22,7 @@ class Enemy < Sprite
         @direction = -1
       end
       @move_y = 1
-      unless ((@count_update % 2 == 0) && self.y >= @seafront) #海岸線を超えたら遅くする  
+      unless ((@count_update % 2 == 0) && (self.y >= @seafront || @hp == 1) )#海岸線を超えたら,HPが１のとき遅くする  
         self.x += (@move_v * @direction)
         self.y += @move_y
       end
@@ -38,6 +41,10 @@ class Enemy < Sprite
   def hit(obj)
     @hp -= 1
 
+    if  @hp == 1
+      self.image = @@enemy_w_img
+    end
+
     if @hp == 0 && !@stopped
       @vanished = true
     end
@@ -46,7 +53,7 @@ class Enemy < Sprite
   def self.arrive(enemies)
     enemies.each do |enemy|
       if 559 == enemy.y
-        puts life = Player.decrement_life
+        life = Player.decrement_life
         # A background is changed in the amount of damages
         if  4 < life && life <= 7
           enemy.director.player_is_damege        
@@ -78,19 +85,22 @@ class Enemy < Sprite
   def self.change_enemies_hp(enemies, score_point)
     return if enemies.empty?
     # ここでレベルアップかどうかを判定するといいと思います。
-    if score_point == Configure::CANGE_STAG_POINT_MIN || score_point == Configure::CANGE_STAG_POINT_HIGHE
+    if Configure::CANGE_STAG_POINT_MIN <= score_point && score_point < Configure::CANGE_STAG_POINT_HIGHE
       enemies.each do |enemy|
         enemy.change_enemies_hp(score_point)
+      end
+    elsif Configure::CANGE_STAG_POINT_HIGHE <= score_point
+      enemies.each do |enemy|
+        enemy.change_enemies_hp2(score_point)
       end
     end
   end
 
   def change_enemies_hp(score_point)
-    if Configure::CANGE_STAG_POINT_MIN == score_point
       @hp = Configure::ENEMY_HP_2
-    elsif Configure::CANGE_STAG_POINT_HIGHE == score_point
-      @hp = Configure::ENEMY_HP_3
-    end
   end
-
+  
+  def change_enemies_hp2(score_point)
+      @hp = Configure::ENEMY_HP_3
+  end
 end

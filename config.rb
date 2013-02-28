@@ -10,7 +10,8 @@ class Configure
 	# KEY_MOVE_LEFT = K_H
 	# KEY_MOVE_RIGHT = K_L
 	# KEY_SHOT = K_UP
-	 KEY_SHOT = K_SPACE
+	KEY_SHOT = K_SPACE
+	KEY_AIRSTRIKE = K_O
 	
 
 	#LIFE and STAGE condition
@@ -56,7 +57,8 @@ class Configure
 
 	#Airstrike
 	FIGHTER_SPEED = 20
-	KEY_AIRSTRIKE = K_O
+	AIRSTRIKE_BOMB_NUMBER = 30
+	BOMB_FALLDOWN_SPEED = 5
 	
 	#Stage
 	CANGE_STAG_POINT_MIN = 10
