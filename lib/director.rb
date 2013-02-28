@@ -6,7 +6,6 @@ class Director
   def initialize
     @map = Map.new
     @score = Score.new
-
     @score.map = self
 
     # 海岸の画像の設定
@@ -18,37 +17,28 @@ class Director
 
     @damege_img = Image.load("./images/lake2.jpg")
     @death_img = Image.load("./images/lake3.jpg")
-
-
     @player_img = Image.load("./images/player.png")
+    
     @player_img.setColorKey([0, 0, 0])
-
-#画像を読み込んでおく
-
+    
+    #画像を読み込んでおく
     @enemy_img = Image.load("./images/enemy.png")
     @enemy_img.setColorKey([0, 0, 0])
     @bullet_img = Image.load("./images/bullet.png")
     @bullet_img.setColorKey([0, 0, 0])
     @boss_img = Image.load("./images/tokio.png")
     @boss_img.setColorKey([0, 0, 0])
+    @pants_img = Image.load("./images/pants.png")
+    @pants_img.setColorKey([0, 0, 0])
 
     @player = Player.new(Configure::PLAYER_INIT_X, Configure::PLAYER_INIT_Y, @player_img)
+    #Player's position at the beggining of the game
 
-    #####
-    @explode = AnimeSprite.new(@player.x,@player.y)
-    explode_images = Image.load_tiles('./images/explode.bmp', 8, 2)
-
-    explode_images.each do |e|
-      e.setColorKey([0, 0, 0])
-    end
-
-    @explode.animation_image = explode_images
-
+    #### Explode Initialize
+    @explode = Explode.new()
     @explode_frames = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] 
-
-    @explode.add_animation(:anime1, 5, @explode_frames) 
-    @explode_flag = false
-    ######
+    @explode.add_animation(:anime1, 3, @explode_frames) 
+    ###
 
     @enemies = []
     @enemy_count = 0
@@ -56,15 +46,25 @@ class Director
     @bullets = []
 
     @boss = []
+
+    @pants = []
   
   end
 
   def check_collision
     #hit 
-    if Sprite.check(@bullets, @enemies) 
-      @score.point += 1    
-    elsif Sprite.check(@bullets, @boss)
+    if Sprite.check(@bullets, @enemies) || Sprite.check(@pants, @boss)
+      #explode
+      @explode.x = @bullets.last.x
+      @explode.y = @bullets.last.y - 50
+      @explode.start_animation(:anime1) 
+      @explode.flag = true     
+      #score
       @score.point += 1
+    end
+    if Sprite.check(@pants, @boss)
+      # Clear action
+      @score.clear
     end
   end
 
@@ -98,6 +98,10 @@ class Director
     Sprite.draw(@boss)
     Sprite.clean(@boss)
 
+    Sprite.update(@pants)
+    Sprite.draw(@pants)
+    Sprite.clean(@pants)
+
     Sprite.draw(@score)
 
     @player.update
@@ -110,21 +114,10 @@ class Director
     @player.draw
 
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
+    Pants.fire(@pants,@pants_img,@player.x,@player.y,@player.angle)
 
-    if Input.keyPush? K_B
-      p "explode"
-      @explode.start_animation(:anime1) 
-      @explode_flag = true
-    end
-
+    #explode shot
     @explode.update
-
-    if @explode.anime_sprite_count  >= ((@explode_frames.size * @explode.anime_sprite_frame_count) - 1)
-      @explode_flag = false
-    end
-
-    @explode.draw if @explode_flag
-
 
     #tokio pop condition....
     # add_tokio(50,1)
@@ -132,7 +125,7 @@ class Director
 
     # Apper boss
     Boss.add_boss(self, @score.point)
-    
+
   end
 
 end

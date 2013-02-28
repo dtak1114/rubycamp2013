@@ -49,6 +49,7 @@ class AnimeSprite < Sprite
 
   def add_animation(v, frame_count, animation_pattern=nil, nxt=nil)
     @anime_sprite_hash[v] = [frame_count, animation_pattern, nxt]
+    return @anime_sprite_hash[v]
   end
 
   def update
