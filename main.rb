@@ -10,6 +10,7 @@ require_relative 'lib/enemy'
 require_relative 'lib/scene'
 require_relative 'lib/ending'
 require_relative 'lib/title'
+require_relative 'lib/gameover'
 require_relative 'lib/bullet'
 require_relative 'lib/map'
 require_relative 'lib/map_obj'
@@ -28,10 +29,12 @@ end
 title  = Title.new
 ending = Ending.new
 director = Director.new
+gameover = Gameover.new
 
 Scene.add_scene(:title, title)
 Scene.add_scene(:director, director)
 Scene.add_scene(:ending, ending)
+Scene.add_scene(:gameover, gameover)
 
 Scene.set_scene(:title)
 log.info("Game started!")
