@@ -6,6 +6,7 @@ class Director
   def initialize
     @map = Map.new
     @score = Score.new
+
     @score.map = self
 
     # 海岸の画像の設定
@@ -17,17 +18,20 @@ class Director
 
     @damege_img = Image.load("./images/lake2.jpg")
     @death_img = Image.load("./images/lake3.jpg")
+
+
     @player_img = Image.load("./images/player.png")
-    
     @player_img.setColorKey([0, 0, 0])
-    
-    #画像を読み込んでおく
+
+#画像を読み込んでおく
+
     @enemy_img = Image.load("./images/enemy.png")
     @enemy_img.setColorKey([0, 0, 0])
     @bullet_img = Image.load("./images/bullet.png")
     @bullet_img.setColorKey([0, 0, 0])
     @boss_img = Image.load("./images/tokio.png")
     @boss_img.setColorKey([0, 0, 0])
+
     @pants_img = Image.load("./images/pants.png")
     @pants_img.setColorKey([0, 0, 0])
 
@@ -48,7 +52,7 @@ class Director
     @boss = []
 
     @pants = []
-  
+    @time = Time.new + 30  
   end
 
   def check_collision
@@ -61,10 +65,6 @@ class Director
       @explode.flag = true     
       #score
       @score.point += 1
-    end
-    if Sprite.check(@pants, @boss)
-      # Clear action
-      @score.clear
     end
   end
 
@@ -114,18 +114,15 @@ class Director
     @player.draw
 
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
-    Pants.fire(@pants,@pants_img,@player.x,@player.y,@player.angle)
+    Pants.fire(@pants, @pants_img, @player.x, @player.y, @player.angle, @score.point)
 
     #explode shot
     @explode.update
 
     #tokio pop condition....
-    # add_tokio(50,1)
     Enemy.increment_enemeis(self, @enemy_count)
 
     # Apper boss
-    Boss.add_boss(self, @score.point)
-
-  end
-
+    Boss.add_boss(self, @score.point, @time)
+ end
 end

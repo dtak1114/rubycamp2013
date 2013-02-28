@@ -21,7 +21,7 @@ class Score
 	end
   end
 
-  def clear
+  def self.clear
 	# Ending
   	Scene.set_scene(:ending)
   end

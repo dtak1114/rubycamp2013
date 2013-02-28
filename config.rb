@@ -42,11 +42,15 @@ class Configure
 	ENEMY_IMG_WIDTH = 32
 	# ENEMY_MOVEMENT_WIDTH =
 
+	#BOSS
+	BOSS_HP = 10
+
 	#Bullet
 	BULLET_SPEED = 6
 
 	#Pants
 	PANTS_SPEED = 8
+	PANTS_APPEAR_POINT = 30
 	
 	#logger
 	LOG_FILE = File.dirname(__FILE__) + "log/info.log"
