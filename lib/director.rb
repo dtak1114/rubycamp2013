@@ -40,7 +40,7 @@ class Director
     @bgm.play
 
     #SE
-    @sound_fire = Sound.new("sound/se_saa07.wav")
+    @sound_fire = Sound.new("sound/explosion.wav")
 
     @player = Player.new(Configure::PLAYER_INIT_X, Configure::PLAYER_INIT_Y, @player_img)
     #Player's position at the beggining of the game
