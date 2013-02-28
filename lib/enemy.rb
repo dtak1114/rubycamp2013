@@ -1,6 +1,9 @@
 # coding: utf-8
 
 class Enemy < Sprite
+  @@enemy_w_img = Image.load("./images/enemy_w.png")
+  @@enemy_w_img.setColorKey([0, 0, 0])
+
   attr_accessor :stopped, :director
   def initialize( x=0, y=0, image=nil) 
     super
@@ -37,6 +40,10 @@ class Enemy < Sprite
 
   def hit(obj)
     @hp -= 1
+
+    if  @hp == 1
+      self.image = @@enemy_w_img
+    end
 
     if @hp == 0 && !@stopped
       @vanished = true
