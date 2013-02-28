@@ -88,6 +88,7 @@ class Director
       Sprite.draw(array)
       Sprite.clean(array)
     end
+    check_collision
 
     Sprite.draw(@score)
 

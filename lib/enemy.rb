@@ -1,10 +1,11 @@
 # coding: utf-8
 
 class Enemy < Sprite
+  attr_accessor :stopped, :director
+  
   @@enemy_w_img = Image.load("./images/enemy_w.png")
   @@enemy_w_img.setColorKey([0, 0, 0])
 
-  attr_accessor :stopped, :director
   def initialize( x=0, y=0, image=nil) 
     super
     @seafront = Configure::SEAFRONT_THRESHOLD #海岸線を暫定的に決定　
