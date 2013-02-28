@@ -45,6 +45,7 @@ log.info("Game started!")
 Window.width  = Configure::WINDOW_WIDTH
 Window.height = Configure::WINDOW_HEIGHT
 
+
 Window.loop do
   break if Input.keyPush?(K_ESCAPE)
 	Scene.play

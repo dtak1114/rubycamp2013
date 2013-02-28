@@ -3,7 +3,8 @@
 class Airstrike < Sprite
 	@@falcon_img = Image.load("./images/ff.png")
 	@@falcon_img.setColorKey([0,0,0])
-
+	@@bomb_img = Image.load("images/bomb1.jpg")
+	@@bomb_img.setColorKey([255,255,255])
 	def initialize(x=Window.width+200, y=0, image=@@falcon_img)
 		super
 		@flag = false
@@ -11,10 +12,6 @@ class Airstrike < Sprite
 
 	def update
 		self.x -= Configure::FIGHTER_SPEED
-	end
-
-	def shot
-		
 	end
 
 	def self.fire(fighters)
@@ -26,6 +23,29 @@ class Airstrike < Sprite
 
 	def vanished?
 		return @vanished	
+	end
+end
+
+class Bomb < Airstrike
+
+	def initialize
+		super	
+	end
+
+	def update
+		self.y += Configure::BOMB_FALLDOWN_SPEED
+	end
+
+	def self.fire(bombs,fighters)
+		if Input.keyPush?(Configure::KEY_AIRSTRIKE)
+			(Configure::AIRSTRIKE_BOMB_NUMBER).times do 
+				bombs << Bomb.new(rand(Window.width),-300,@@bomb_img)	
+			end
+		end
+	end
+
+	def shot(obj)
+    @vanished = true unless @stopped
 	end
 
 end

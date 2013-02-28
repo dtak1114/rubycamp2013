@@ -49,12 +49,13 @@ class Director
     @boss = []
     @pants = []
     @fighters = []
+    @bombs =[]
     @time = Time.new + 30  
   end
 
   def check_collision
     #hit 
-    if Sprite.check(@bullets, @enemies) || Sprite.check(@pants, @boss)
+    if Sprite.check(@bullets, @enemies) || Sprite.check(@pants, @boss) || Sprite.check(@bombs, @enemies)
       #explode
       @explode.x = @bullets.last.x || @pants.last.x
       @explode.y = (@bullets.last.y - 50) || (@pants.last.y - 50)
@@ -78,49 +79,32 @@ class Director
 
     # background initialize
     @map.scroll
-    @map.draw
-    @land.draw
-    @lake.draw
-    @score_background.draw
+    [@map,@land,@lake,@score_background].each do |img|
+        img.draw
+    end
     
-    Sprite.update(@enemies)
-    Sprite.draw(@enemies)
-    Sprite.clean(@enemies)
-     
-    Sprite.update(@bullets)
-    Sprite.draw(@bullets)
-    Sprite.clean(@bullets)
-
-    Sprite.update(@fighters)
-    Sprite.draw(@fighters)
-    Sprite.clean(@fighters)
-
-    Sprite.update(@boss)
-    Sprite.draw(@boss)
-    Sprite.clean(@boss)
-
-    Sprite.update(@pants)
-    Sprite.draw(@pants)
-    Sprite.clean(@pants)
+    [@player,@enemies,@bullets,@fighters,@boss,@pants,@bombs].each do |array| 
+      Sprite.update(array)
+      Sprite.draw(array)
+      Sprite.clean(array)
+    end
 
     Sprite.draw(@score)
 
-    @player.update
-    check_collision
 
     # background-change handle
     Enemy.arrive(@enemies)
     @score.next_stage(@map)
     
-    @player.draw
-
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
+    Bomb.fire(@bombs,@fighters)
     Airstrike.fire(@fighters)
+
     Enemy.increment_enemies(self, @enemy_count)
 
     #explode shot
     @explode.update
-    
+
     Pants.fire(@pants, @pants_img, @player.x, @player.y, @player.angle, @score.point)
 
     # Apper boss
