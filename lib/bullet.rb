@@ -5,6 +5,7 @@ class Bullet < Sprite
 
   def initialize( x=0, y=0, image=nil,angle=0) 
     super
+    
     case angle
     when -45
       @direction = :left

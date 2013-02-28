@@ -47,10 +47,24 @@ class Enemy < Sprite
           enemy.director.player_is_damege        
         elsif life <= 0
           enemy.director.player_is_dead
-          #ToDo: GameOver action
+          # ToDo: GameOver action
         end
       end      
     end
   end
 
+  def self.add_enemies(directer, bounds_y, num = 10)
+    num.times do
+      enemy  = Enemy.new(rand(Configure::WINDOW_WIDTH - directer.enemy_img.width), rand(bounds_y), directer.enemy_img)
+      enemy.director = self
+      directer.enemies << enemy
+      directer.enemy_count += 1
+    end
+  end
+
+  def self.increment_enemeis(directer, enemy_count)
+    if enemy_count < Configure::MAX_ENEMY_NUMBER
+      add_enemies(directer, 50, 1) if ( rand(50) == 2 )
+    end
+  end
 end

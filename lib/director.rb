@@ -19,16 +19,33 @@ class Director
     @damege_img = Image.load("./images/lake2.jpg")
     @death_img = Image.load("./images/lake3.jpg")
 
+
     @player_img = Image.load("./images/player.png")
     @player_img.setColorKey([0, 0, 0])
     @enemy_img = Image.load("./images/enemy.png")
     @enemy_img.setColorKey([0, 0, 0])
     @bullet_img = Image.load("./images/bullet.png")
     @bullet_img.setColorKey([0, 0, 0])
-    @boss_img = Image.load("./images/boss.jpg")
+    @boss_img = Image.load("./images/tokio.png")
     @boss_img.setColorKey([0, 0, 0])
 
     @player = Player.new(Configure::PLAYER_INIT_X, Configure::PLAYER_INIT_Y, @player_img)
+
+    #####
+    @explode = AnimeSprite.new(@player.x,@player.y)
+    explode_images = Image.load_tiles('./images/explode.bmp', 8, 2)
+
+    explode_images.each do |e|
+      e.setColorKey([0, 0, 0])
+    end
+
+    @explode.animation_image = explode_images
+
+    @explode_frames = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] 
+
+    @explode.add_animation(:anime1, 5, @explode_frames) 
+    @explode_flag = false
+    ######
 
     @enemies = []
     @enemy_count = 0
@@ -91,11 +108,28 @@ class Director
 
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
 
+    if Input.keyPush? K_B
+      p "explode"
+      @explode.start_animation(:anime1) 
+      @explode_flag = true
+    end
+
+    @explode.update
+
+    if @explode.anime_sprite_count  >= ((@explode_frames.size * @explode.anime_sprite_frame_count) - 1)
+      @explode_flag = false
+    end
+
+    @explode.draw if @explode_flag
+
+
+    #tokio pop condition....
+    # add_tokio(50,1)
     Enemy.increment_enemeis(self, @enemy_count)
 
     # Apper boss
     Boss.add_boss(self, @score.point)
-  
+    # add_boss if @boss.empty?
   end
 
 end
