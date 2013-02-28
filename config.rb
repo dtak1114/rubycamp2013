@@ -47,6 +47,7 @@ class Configure
 
 	#Pants
 	PANTS_SPEED = 8
+	PANTS_APPEAR_POINT = 30
 	
 	#logger
 	LOG_FILE = File.dirname(__FILE__) + "log/info.log"

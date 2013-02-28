@@ -31,10 +31,9 @@ class Boss < Sprite
     @vanished = true unless @stopped
   end
 
-  def self.add_boss(directer, score_point)
-    if directer.boss.empty? 
-        directer.boss << Boss.new(350, 200, directer.boss_img)
+  def self.add_boss(directer, score_point,  time)
+    if time <= Time.new && directer.boss.empty?
+        directer.boss << self.new(350, 200, directer.boss_img)
     end
   end
-
 end

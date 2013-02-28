@@ -51,7 +51,7 @@ class Director
     @boss = []
 
     @pants = []
-  
+    @time = Time.new + 30  
   end
 
   def check_collision
@@ -123,12 +123,10 @@ class Director
     @explode.update
 
     #tokio pop condition....
-    # add_tokio(50,1)
     Enemy.increment_enemeis(self, @enemy_count)
 
     # Apper boss
-    Boss.add_boss(self, @score.point)
-
+    Boss.add_boss(self, @score.point, @time)
   end
 
 end
