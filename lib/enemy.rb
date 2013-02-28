@@ -85,9 +85,9 @@ class Enemy < Sprite
   end
 
   def self.change_enemies_hp(score_point)
-    if Configure::CANGE_STAG_POINT_MIN <= score_point && score_point < Configure::CANGE_STAG_POINT_HIGHE
+    if Configure::CHANGE_STAG_POINT_MIN <= score_point && score_point < Configure::CHANGE_STAG_POINT_HIGHE
       @@enemy_hp = Configure::ENEMY_HP_2
-    elsif Configure::CANGE_STAG_POINT_HIGHE <= score_point
+    elsif Configure::CHANGE_STAG_POINT_HIGHE <= score_point
       @@enemy_hp = Configure::ENEMY_HP_3
     end
   end

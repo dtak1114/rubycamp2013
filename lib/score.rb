@@ -14,10 +14,10 @@ class Score
 
   def next_stage(map, point)
   	# background_change handle
-  	if Configure::CANGE_STAG_POINT_MIN <= @point && @point < Configure::CANGE_STAG_POINT_HIGHE
+  	if Configure::CHANGE_STAG_POINT_MIN <= @point && @point < Configure::CHANGE_STAG_POINT_HIGHE
   		map.change_stage2
    		Enemy.change_enemies_hp(point) 		
-  	elsif Configure::CANGE_STAG_POINT_HIGHE <= @point
+  	elsif Configure::CHANGE_STAG_POINT_HIGHE <= @point
   		map.change_stage3
   		Enemy.change_enemies_hp(point)
 	end
