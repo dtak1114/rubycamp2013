@@ -2,7 +2,7 @@
 
 class Boss < Sprite
   attr_accessor :stopped
-  def initialize( x=0, y=0, image=nil) 
+  def initialize( x, y, image=nil) 
     super
     @count_update = 0 #updateを行った回数を数える   
     @move_x = rand(5) #敵のx方向の移動量
@@ -12,9 +12,9 @@ class Boss < Sprite
   def update()
     unless @stopped 
       #移動の処理
-      self.x = Math.sin((@count_update % 360) * Math::PI / 180) #八の字運動
-      self.y = Math.sin((@count_update % 360) * Math::PI / 180)
-      
+      # self.x = Math.sin((@count_update % 360) * Math::PI / 180) #八の字運動
+      # self.y = Math.sin((@count_update % 360) * Math::PI / 180)
+    end  
 
     if self.y >= Window.height - self.image.height
       @vanished = true
@@ -28,18 +28,6 @@ class Boss < Sprite
 
   def hit(obj)
     @vanished = true unless @stopped
-  end
-
-  def self.arrive(enemies)
-    enemies.each do |enemy|
-      if enemy.y == 550
-        life = Player.getdamege
-        if life <= 0
-          #ToDO: GameOver action
-          #puts "gemeover"
-        end
-      end      
-    end
   end
 
 end
