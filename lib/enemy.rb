@@ -40,14 +40,16 @@ class Enemy < Sprite
 
   def self.arrive(enemies)
     enemies.each do |enemy|
-      if enemy.y == 550
+      if 559 == enemy.y
         puts life = Player.decrement_life
         # A background is changed in the amount of damages
-        if  1 <= life && life <= 5
+        if  4 < life && life <= 7
           enemy.director.player_is_damege        
-        elsif life <= 0
+        elsif 0 < life && life <= 4
           enemy.director.player_is_dead
-          # ToDo: GameOver action
+        elsif life <= 0
+          # GameOver 
+          Scene.set_scene(:gameover)
         end
       end      
     end
@@ -56,7 +58,7 @@ class Enemy < Sprite
   def self.add_enemies(directer, bounds_y, num = 10)
     num.times do
       enemy  = Enemy.new(rand(Configure::WINDOW_WIDTH - directer.enemy_img.width), rand(bounds_y), directer.enemy_img)
-      enemy.director = self
+      enemy.director = directer
       directer.enemies << enemy
       directer.enemy_count += 1
     end
