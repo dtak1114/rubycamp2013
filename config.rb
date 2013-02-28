@@ -16,7 +16,6 @@ class Configure
 	#LIFE and STAGE condition
 	GOAL_SCORE = 100
 	
-
 	#window
 	WINDOW_HEIGHT = 600
 	WINDOW_WIDTH = 800
@@ -40,8 +39,7 @@ class Configure
 	MAX_ENEMY_NUMBER = 100
 	SEAFRONT_THRESHOLD = 300
 	ENEMY_IMG_WIDTH = 32
-	# ENEMY_MOVEMENT_WIDTH =
-
+	
 	#BOSS
 	BOSS_HP = 10
 
@@ -52,6 +50,11 @@ class Configure
 	PANTS_SPEED = 8
 	PANTS_APPEAR_POINT = 30
 	
+	#Stage
+	CANGE_STAG_POINT_MIN = 10
+	CANGE_STAG_POINT_HIGHE = 20
+
+
 	#logger
 	LOG_FILE = File.dirname(__FILE__) + "log/info.log"
 	LOG_LEVEL = Logger::INFO
