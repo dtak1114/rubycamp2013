@@ -57,8 +57,8 @@ class Director
     #hit 
     if Sprite.check(@bullets, @enemies) || Sprite.check(@pants, @boss) || Sprite.check(@bombs, @enemies)
       #explode
-      @explode.x = @bullets.last.x || @pants.last.x
-      @explode.y = (@bullets.last.y - 50) || (@pants.last.y - 50)
+      @explode.x = @enemies.last.x || @boss.last.x
+      @explode.y = (@enemies.last.y - 50) || (@boss.last.y - 50)
       @explode.start_animation(:anime1) 
       @explode.flag = true     
       #score
@@ -88,6 +88,7 @@ class Director
       Sprite.draw(array)
       Sprite.clean(array)
     end
+
     check_collision
 
     Sprite.draw(@score)
