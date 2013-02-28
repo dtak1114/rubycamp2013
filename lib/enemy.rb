@@ -22,7 +22,7 @@ class Enemy < Sprite
         @direction = -1
       end
       @move_y = 1
-      unless ((@count_update % 2 == 0) && self.y >= @seafront) #海岸線を超えたら遅くする  
+      unless ((@count_update % 2 == 0) && (self.y >= @seafront || @hp == 1) )#海岸線を超えたら,HPが１のとき遅くする  
         self.x += (@move_v * @direction)
         self.y += @move_y
       end
