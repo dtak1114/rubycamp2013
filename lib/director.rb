@@ -1,6 +1,8 @@
 ﻿# coding: utf-8
 
 class Director
+  attr_reader :enemy_img, :boss_img
+  attr_accessor :enemies, :enemy_count, :boss
   def initialize
     @map = Map.new
     @score = Score.new
@@ -32,26 +34,16 @@ class Director
     @enemy_count = 0
 
     @bullets = []
+
     @boss = []
   
-  end
-
-  def add_enemies(bounds_y, num = 10)
-    num.times do
-      enemy  = Enemy.new(rand(Configure::WINDOW_WIDTH - @enemy_img.width), rand(bounds_y), @enemy_img)
-      enemy.director = self
-      @enemies << enemy
-      @enemy_count += 1
-    end
-  end
-
-  def add_boss
-    @boss << Boss.new(350, 200, @boss_img)    
   end
 
   def check_collision
     #hit 
     if Sprite.check(@bullets, @enemies) 
+      @score.point += 1    
+    elsif Sprite.check(@bullets, @boss)
       @score.point += 1
     end
   end
@@ -99,13 +91,11 @@ class Director
 
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
 
-    if @enemy_count < Configure::MAX_ENEMY_NUMBER
-      add_enemies(50, 1) if ( rand(50) == 2 )
-    end
+    Enemy.increment_enemeis(self, @enemy_count)
 
     # Apper boss
-    # add_boss
-
+    Boss.add_boss(self, @score.point)
+  
   end
 
 end

@@ -30,8 +30,10 @@ class Boss < Sprite
     @vanished = true unless @stopped
   end
 
-  def self.add_boss(directer)
-    directer.boss << Boss.new(350, 200, directer.boss_img)    
+  def self.add_boss(directer, score_point)
+    if 3 <= score_point 
+      directer.boss << Boss.new(350, 200, directer.boss_img)
+    end
   end
 
 end
