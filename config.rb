@@ -42,6 +42,9 @@ class Configure
 	ENEMY_IMG_WIDTH = 32
 	# ENEMY_MOVEMENT_WIDTH =
 
+	#BOSS
+	BOSS_HP = 10
+
 	#Bullet
 	BULLET_SPEED = 6
 
