@@ -30,11 +30,4 @@ class Explode < AnimeSprite
 		return bullets << new_bullet 
   end
 
-  def vanished?
-    return @vanished
-  end
-
-  def hit(obj)
-    @vanished = true unless @stopped
-  end
 end
