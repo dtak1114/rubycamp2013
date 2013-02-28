@@ -8,7 +8,7 @@ class Enemy < Sprite
     @count_update = 0 #updateを行った回数を数える   
     @move_v = rand(5)
     @direction = [1, -1][rand(2)]
-    @hp = 2
+    @hp = Configure::ENEMY_HP
   end
 
   def update()
@@ -37,6 +37,7 @@ class Enemy < Sprite
 
   def hit(obj)
     @hp -= 1
+
     if @hp == 0 && !@stopped
       @vanished = true
     end
