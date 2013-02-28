@@ -53,8 +53,7 @@ class Bullet < Sprite
     return @vanished
   end
 
-  def hit(obj)
+  def shot(obj)
     @vanished = true unless @stopped
-     
   end
 end
