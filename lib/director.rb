@@ -43,24 +43,21 @@ class Director
     @explode_frames = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] 
     @explode.add_animation(:anime1, 3, @explode_frames) 
     ###
-
     @enemies = []
     @enemy_count = 0
-
     @bullets = []
-
     @boss = []
-
     @pants = []
-    @time = Time.new + 30  
+    @fighters = []
+    @time = Time.new + 30
   end
 
   def check_collision
     #hit 
     if Sprite.check(@bullets, @enemies) || Sprite.check(@pants, @boss)
       #explode
-      @explode.x = @bullets.last.x
-      @explode.y = @bullets.last.y - 50
+      @explode.x = @bullets.last.x || @pants.last.x
+      @explode.y = (@bullets.last.y - 50) || (@pants.last.y - 50)
       @explode.start_animation(:anime1) 
       @explode.flag = true     
       #score
@@ -94,6 +91,10 @@ class Director
     Sprite.draw(@bullets)
     Sprite.clean(@bullets)
 
+    Sprite.update(@fighters)
+    Sprite.draw(@fighters)
+    Sprite.clean(@fighters)
+
     Sprite.update(@boss)
     Sprite.draw(@boss)
     Sprite.clean(@boss)
@@ -114,13 +115,13 @@ class Director
     @player.draw
 
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
-    Pants.fire(@pants, @pants_img, @player.x, @player.y, @player.angle, @score.point)
+    Airstrike.fire(@fighters)
+    Enemy.increment_enemies(self, @enemy_count)
 
     #explode shot
     @explode.update
-
-    #tokio pop condition....
-    Enemy.increment_enemeis(self, @enemy_count)
+    
+    Pants.fire(@pants, @pants_img, @player.x, @player.y, @player.angle, @score.point)
 
     # Apper boss
     Boss.add_boss(self, @score.point, @time)

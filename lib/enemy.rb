@@ -69,7 +69,7 @@ class Enemy < Sprite
     end
   end
 
-  def self.increment_enemeis(directer, enemy_count)
+  def self.increment_enemies(directer, enemy_count)
     if enemy_count < Configure::MAX_ENEMY_NUMBER
       add_enemies(directer, 50, 1) if ( rand(50) == 2 )
     end

@@ -46,6 +46,7 @@ class Boss < Sprite
   def self.add_boss(directer, score_point,  time)
     if time <= Time.new && directer.boss.empty?
         directer.boss << self.new(350, 200, directer.boss_img)
+        return directer.boss
     end
   end
 end
