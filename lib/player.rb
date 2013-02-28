@@ -1,12 +1,13 @@
 # coding: utf-8
 
 class Player < Sprite
+  attr_accessor :angle
   # Hit-Point setting
   @@hp = 10
 
   def initialize(*)
     super
-    @pushed = 2
+    @angle = 2
     @font = Font.new(32)
     @player_l_img = Image.load("./images/player_l.png")
     @player_l_img.setColorKey([0, 0, 0])
@@ -14,17 +15,16 @@ class Player < Sprite
     @player_r_img.setColorKey([0, 0, 0])
     @player_img = self.image
   end
+
   def update
     @dx = Input.x * Configure::PLAYER_MOVE_SPEED
     self.x += @dx
     self.x -= @dx unless (0..Window.width - self.image.width).include?(self.x)
-    @pushed = @pushed += 1 if (Input.keyPush?(K_D) && @pushed < 3)#¶‚ÉŒX‚­
-    @pushed = @pushed -= 1 if (Input.keyPush?(K_A) && @pushed > 1)#‰E‚ÉŒX‚­
-    case @pushed
+    @angle = @angle += 1 if (Input.keyPush?(Configure::KEY_LEAN_LEFT) && @angle< 3)
+    @angle= @angle-= 1 if (Input.keyPush?(Configure::KEY_LEAN_RIGHT) && @angle> 1)
+    case @angle
       when 1
-# ‚±‚±‚Å‰æ‘œ‚ğØ‚è‘Ö‚¦‚é
           self.image = @player_l_img
-#          self.angle = -45
       when 2
           self.image = @player_img
       when 3

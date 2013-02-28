@@ -6,7 +6,6 @@ class Director
   def initialize
     @map = Map.new
     @score = Score.new
-
     @score.map = self
 
     # 海岸の画像の設定
@@ -18,13 +17,11 @@ class Director
 
     @damege_img = Image.load("./images/lake2.jpg")
     @death_img = Image.load("./images/lake3.jpg")
-
-
     @player_img = Image.load("./images/player.png")
+    
     @player_img.setColorKey([0, 0, 0])
-
-#画像を読み込んでおく
-
+    
+    #画像を読み込んでおく
     @enemy_img = Image.load("./images/enemy.png")
     @enemy_img.setColorKey([0, 0, 0])
     @bullet_img = Image.load("./images/bullet.png")

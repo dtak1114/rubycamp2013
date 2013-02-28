@@ -4,6 +4,15 @@ require "logger"
 
 class Configure
 
+	#KEY_CONFIG
+	KEY_LEAN_LEFT= K_D
+	KEY_LEAN_RIGHT = K_A
+	KEY_MOVE_LEFT = K_H
+	KEY_MOVE_RIGHT = K_L
+	# KEY_SHOT = K_UP
+	 KEY_SHOT = K_SPACE
+	
+
 	#LIFE and STAGE condition
 	GOAL_SCORE = 100
 	
