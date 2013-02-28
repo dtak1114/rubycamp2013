@@ -14,7 +14,7 @@ require_relative 'lib/bullet'
 require_relative 'lib/map'
 require_relative 'lib/map_obj'
 require_relative 'lib/score'
-require_relative 'lib/enemy_tokio'
+require_relative 'lib/boss'
 
 # Logger settings
 begin
