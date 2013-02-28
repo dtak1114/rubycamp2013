@@ -112,6 +112,5 @@ class Director
     # Apper boss
     Boss.add_boss(self, @score.point, @time)
 
-  end
  end
 end
