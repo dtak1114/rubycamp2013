@@ -19,6 +19,7 @@ class Score
   	elsif 5 <= @point && @point < 10
   		map.change_stage3
   	elsif 10 <= @point
+  		# Ending
   		Scene.set_scene(:ending)
   	end
   end
