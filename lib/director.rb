@@ -121,11 +121,6 @@ class Director
 
     #explode shot
     @explode.update
-    if @explode.anime_sprite_count  >= ((@explode_frames.size * @explode.anime_sprite_frame_count) - 1)
-      @explode.flag = false
-    end
-    @explode.draw if @explode.flag
-
 
     #tokio pop condition....
     # add_tokio(50,1)
