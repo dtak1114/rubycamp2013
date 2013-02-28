@@ -1,6 +1,7 @@
 # coding: utf-8
 
 class Bullet < Sprite
+
   attr_accessor :stopped,:direction
 
   def initialize( x, y, image=nil, angle=0) 
@@ -13,12 +14,11 @@ class Bullet < Sprite
     else 
       @direction = :straight
     end
-    @fire_sound = Sound.new("sound/fire.wav")
   end
 
-  def self.fire(bullets, img, player_loc_x, player_loc_y,player_angle)
+  def self.fire(bullets, img, player_loc_x, player_loc_y,player_angle,sound)
   	if Input.keyPush?(Configure::KEY_SHOT)
-      @fire_sound.play
+      sound.play
       new_bullet = self.new(player_loc_x + 65, player_loc_y + 10, img, player_angle)
   		return bullets << new_bullet 
   	end

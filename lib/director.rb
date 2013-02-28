@@ -37,7 +37,10 @@ class Director
 
     #BGM
     @bgm = Sound.new("sound/bgm.mid") 
+    @bgm.play
+
     #SE
+    @sound_fire = Sound.new("sound/se_saa07.wav")
 
     @player = Player.new(Configure::PLAYER_INIT_X, Configure::PLAYER_INIT_Y, @player_img)
     #Player's position at the beggining of the game
@@ -92,7 +95,6 @@ class Director
 
   def play
     # refresh per frame 
-    @bgm.play
 
     # background initialize
     @map.scroll
@@ -115,7 +117,7 @@ class Director
     Enemy.arrive(@enemies)
     @score.next_stage(@map, @score.point)
     
-    Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
+    Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle,@sound_fire)
     Bomb.fire(@bombs,@fighters)
     Airstrike.fire(@fighters)
 
