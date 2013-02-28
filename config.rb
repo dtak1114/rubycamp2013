@@ -4,6 +4,9 @@ require "logger"
 
 class Configure
 
+	#LIFE and STAGE condition
+	
+
 	#window
 	WINDOW_HEIGHT = 600
 	WINDOW_WIDTH = 800
@@ -23,8 +26,8 @@ class Configure
 	PLAYER_MOVE_SPEED = 10
 
 	#Enemy
-	INIT_ENEMY_NUMBER = 10
-	MAX_ENEMY_NUMBER = 10
+	INIT_ENEMY_NUMBER = 100
+	MAX_ENEMY_NUMBER = 100
 	SEAFRONT_THRESHOLD = 300
 	ENEMY_IMG_WIDTH = 32
 	# ENEMY_MOVEMENT_WIDTH =
