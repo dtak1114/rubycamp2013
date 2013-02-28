@@ -128,7 +128,8 @@ class Director
     Enemy.increment_enemeis(self, @enemy_count)
 
     # Apper boss
-    Boss.add_boss(self, @score.point) if @boss.empty?
+    Boss.add_boss(self, @score.point)
+    
   end
 
 end
