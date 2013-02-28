@@ -50,6 +50,11 @@ class Configure
 
 	#Pants
 	PANTS_SPEED = 8
+	KEY_PANTS_SHOT = K_P
+
+	#Airstrike
+	FIGHTER_SPEED = 20
+	KEY_AIRSTRIKE = K_O
 	
 	#logger
 	LOG_FILE = File.dirname(__FILE__) + "log/info.log"

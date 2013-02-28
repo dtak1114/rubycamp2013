@@ -16,7 +16,7 @@ class Pants < Sprite
   end
 
   def self.fire(pants, img, player_loc_x, player_loc_y,player_angle)
-  	if Input.keyPush?(K_P)
+  	if Input.keyPush?(Configure::KEY_PANTS_SHOT)
       new_pants = Pants.new(player_loc_x + 14, player_loc_y + 6, img, player_angle)
   		return pants << new_pants
   	end
