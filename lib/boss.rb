@@ -11,9 +11,9 @@ class Boss < Sprite
 
   def update()
     unless @stopped 
-      #移動の処理
-      self.x = (Configure::WINDOW_WIDTH / 2) * Math.sin((@count_update % 360) * Math::PI / 180) + (Configure::WINDOW_WIDTH / 2)#八の字運動
-      self.y = 50 * Math.sin((@count_update % 360) * Math::PI / 180) + 100
+      # 移動の処理
+      # self.x = (Configure::WINDOW_WIDTH / 2) * Math.sin((@count_update % 360) * Math::PI / 180) + (Configure::WINDOW_WIDTH / 2)#八の字運動
+      # self.y = 50 * Math.sin((@count_update % 360) * Math::PI / 180) + 100
     end
 
     if self.y >= Window.height - self.image.height
@@ -30,16 +30,8 @@ class Boss < Sprite
     @vanished = true unless @stopped
   end
 
-  def self.arrive(enemies)
-    enemies.each do |enemy|
-      if enemy.y == 550
-        life = Player.getdamege
-        if life <= 0
-          #ToDO: GameOver action
-          #puts "gemeover"
-        end
-      end      
-    end
+  def self.add_boss(directer)
+    directer.boss << Boss.new(350, 200, directer.boss_img)    
   end
 
 end
