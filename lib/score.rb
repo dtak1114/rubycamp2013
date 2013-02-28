@@ -16,11 +16,13 @@ class Score
   	# background_change handle
   	if 1 <= @point && @point < 5
   		map.change_stage2
-  	elsif 5 <= @point && @point < 10
+  	elsif 5 <= @point
   		map.change_stage3
-  	elsif 10 <= @point
-  		# Ending
-  		Scene.set_scene(:ending)
-  	end
+	end
+  end
+
+  def clear
+	# Ending
+  	Scene.set_scene(:ending)
   end
 end
