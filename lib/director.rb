@@ -33,22 +33,13 @@ class Director
     @boss_img.setColorKey([0, 0, 0])
 
     @player = Player.new(Configure::PLAYER_INIT_X, Configure::PLAYER_INIT_Y, @player_img)
+    #Player's position at the beggining of the game
 
-    #####
-    @explode = AnimeSprite.new(@player.x,@player.y)
-    explode_images = Image.load_tiles('./images/explode.bmp', 8, 2)
-
-    explode_images.each do |e|
-      e.setColorKey([0, 0, 0])
-    end
-
-    @explode.animation_image = explode_images
-
+    #### Explode Initialize
+    @explode = Explode.new()
     @explode_frames = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] 
-
-    @explode.add_animation(:anime1, 5, @explode_frames) 
-    @explode_flag = false
-    ######
+    @explode.add_animation(:anime1, 3, @explode_frames) 
+    ###
 
     @enemies = []
     @enemy_count = 0
@@ -61,9 +52,14 @@ class Director
 
   def check_collision
     #hit 
-    if Sprite.check(@bullets, @enemies) 
+    if Sprite.check(@bullets, @enemies) || Sprite.check(@bullets, @boss)
       @score.point += 1    
-    elsif Sprite.check(@bullets, @boss)
+      #explode
+      @explode.x = @bullets.last.x
+      @explode.y = @bullets.last.y - 50
+      @explode.start_animation(:anime1) 
+      @explode.flag = true     
+      #score
       @score.point += 1
     end
   end
@@ -111,19 +107,12 @@ class Director
 
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
 
-    if Input.keyPush? K_B
-      p "explode"
-      @explode.start_animation(:anime1) 
-      @explode_flag = true
-    end
-
+    #explode shot
     @explode.update
-
     if @explode.anime_sprite_count  >= ((@explode_frames.size * @explode.anime_sprite_frame_count) - 1)
-      @explode_flag = false
+      @explode.flag = false
     end
-
-    @explode.draw if @explode_flag
+    @explode.draw if @explode.flag
 
 
     #tokio pop condition....
