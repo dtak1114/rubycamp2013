@@ -1,33 +1,23 @@
 # coding: utf-8
 
-class Boss < Enemy
-  attr_accessor :stopped
+class Boss < Sprite
+  attr_accessor :stopped, :director
   def initialize( x=0, y=0, image=nil) 
     super
-    @seafront = Configure::SEAFRONT_THRESHOLD #海岸線を決定　
     @count_update = 0 #updateを行った回数を数える   
-    @move_v = 0
+    @move_x = rand(5) #敵のx方向の移動量
+    @direction = [1, -1][rand(2)] #移動の方向
   end
 
   def update()
-    unless @stopped #移動の処理
-      if @count_update % 60 == 0 #once in a second
-        @move_v = rand(10) - 5  #移動速度の変化
-      end
-      #移動
-      @move_v *= -1 if (self.x <= 0 || self.x > Configure::WINDOW_WIDTH - Configure::ENEMY_IMG_WIDTH)
-
-      self.x += @move_v
-      self.y += 1
-
-      if (@count_update % 2 == 0 && self.y >= @seafront) #海岸線を超えたら遅くする  
-        self.y -= 1   
-        self.x -= @move_v if (self.x <= 0 || self.x > Configure::WINDOW_WIDTH - Configure::ENEMY_IMG_WIDTH)
-      end
+    unless @stopped 
+      #移動の処理
+      self.x = (Configure::WINDOW_WIDTH / 3) * Math.sin((@count_update % 360) * Math::PI / 180) + (Configure::WINDOW_WIDTH / 2)#八の字運動
+      self.y = 50 * Math.sin((@count_update % 360) * Math::PI / 180 * 2) + 100
     end
 
     if self.y >= Window.height - self.image.height
-      @stopped = true
+      @vanished = true
     end
     @count_update += 1
   end
@@ -39,4 +29,11 @@ class Boss < Enemy
   def hit(obj)
     @vanished = true unless @stopped
   end
+
+  def self.add_boss(directer, score_point)
+    if directer.boss.empty? && 3 <= score_point 
+        directer.boss << Boss.new(350, 200, directer.boss_img)
+    end
+  end
+
 end
