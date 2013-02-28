@@ -1,5 +1,5 @@
 ﻿# coding: utf-8
-
+require 'pp'
 class Director
   attr_reader :enemy_img, :boss_img
   attr_accessor :enemies, :enemy_count, :boss
@@ -50,15 +50,27 @@ class Director
     @pants = []
     @fighters = []
     @bombs =[]
-    @time = Time.new + 30  
+    @time = Time.new + 30
   end
 
   def check_collision
     #hit 
-    if Sprite.check(@bullets, @enemies) || Sprite.check(@pants, @boss) || Sprite.check(@bombs, @enemies)
+    if Sprite.check(@bullets, @enemies)
       #explode
-      @explode.x = @enemies.last.x || @boss.last.x
-      @explode.y = (@enemies.last.y - 50) || (@boss.last.y - 50)
+      @explode.x = @enemies.last.x
+      @explode.y = (@enemies.last.y - 50)
+      @explode.start_animation(:anime1) 
+      @explode.flag = true     
+      #score
+      @score.point += 1
+    end
+    if Sprite.check(@pants, @boss)
+      @score.point += 1
+    end
+    if Sprite.check(@bombs, @enemies)
+      #explode
+     @explode.x = @enemies.last.x
+      @explode.y = (@enemies.last.y - 50)
       @explode.start_animation(:anime1) 
       @explode.flag = true     
       #score
