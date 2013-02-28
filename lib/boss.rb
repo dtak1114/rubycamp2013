@@ -7,7 +7,6 @@ class Boss < Sprite
     @count_update = 0 #updateを行った回数を数える   
     @move_x = rand(5) #敵のx方向の移動量
     @direction = [1, -1][rand(2)] #移動の方向
-    @time = Time.new
   end
 
   def update()
