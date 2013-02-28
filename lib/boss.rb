@@ -32,7 +32,6 @@ class Boss < Sprite
 
   def hit(obj)
     @hp -= 1
-puts @hp
     if @hp < (Configure::BOSS_HP / 3)
       self.image = @@tokio_d_img
     end
