@@ -91,7 +91,7 @@ class Director
 
   def play
     # refresh per frame 
-    bgm.play
+    # bgm.play
 
     # background initialize
     @map.scroll
