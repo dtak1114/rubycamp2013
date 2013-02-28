@@ -11,6 +11,7 @@ class Boss < Sprite
     @count_update = 0 #updateを行った回数を数える   
     @move_x = rand(5) #敵のx方向の移動量
     @direction = [1, -1][rand(2)] #移動の方向
+    @hit_sound = Sound.new("sound/hit.wav")
   end
 
   def update()
@@ -31,6 +32,7 @@ class Boss < Sprite
   end
 
   def hit(obj)
+    @hit_sound.play
     @hp -= 1
     if @hp < (Configure::BOSS_HP / 3)
       self.image = @@tokio_d_img
