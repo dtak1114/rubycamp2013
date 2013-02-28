@@ -1,9 +1,8 @@
 class Explode < Sprite
-  @@images = Image.loadToArray('images/explode2.bmp', 8, 2)
+  @@images = Image.loadToArray('images/explode.bmp', 8, 2)
   @@images.each do |i|
   	i.setColorKey([0, 0, 0])
   end
-
 	# def initialize( x=0, y=0, image=nil) 
 	# 	super	
 	# end
@@ -21,9 +20,9 @@ class Explode < Sprite
  #  end
 
   def self.play(x,y)
-  	@@images.each { |i| 
+  	@@images.each do |i| 
   		Window.draw(x,y,i)
-  	 }
+	  end
   end
 
 end

@@ -24,6 +24,22 @@ class Director
     @player = Player.new(Configure::PLAYER_INIT_X, Configure::PLAYER_INIT_Y, @player_img)
     @player.director = self
 
+    #####
+    @explode = AnimeSprite.new(@player.x,@player.y)
+    explode_images = Image.load_tiles('./images/explode.bmp', 8, 2)
+
+    explode_images.each do |e|
+      e.setColorKey([0, 0, 0])
+    end
+
+    @explode.animation_image = explode_images
+
+    @explode_frames = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] 
+
+    @explode.add_animation(:anime1, 5, @explode_frames) 
+    @explode_flag = false
+    ######
+
     @enemies = []
     @enemy_count = 0
 
@@ -35,6 +51,15 @@ class Director
       enemy  = Enemy.new(rand(Configure::WINDOW_WIDTH - @enemy_img.width), rand(bounds_y), @enemy_img)
       enemy.director = self
       @enemies << enemy
+      @enemy_count += 1
+    end
+  end
+
+  def add_tokio(bounds_y, num = 10)
+    num.times do
+      tokio  = Boss.new(rand(Configure::WINDOW_WIDTH - @enemy_img.width), rand(bounds_y), @enemy_img)
+      tokio.director = self
+      @enemies << tokio
       @enemy_count += 1
     end
   end
@@ -82,12 +107,26 @@ class Director
 
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle)
 
-    if @enemy_count < Configure::MAX_ENEMY_NUMBER
-      add_enemies(50, 1) if ( rand(50) == 2 )
+    if Input.keyPush? K_B
+      p "explode"
+      @explode.start_animation(:anime1) 
+      @explode_flag = true
     end
 
-    if Input.key_push? K_B
-      Explode.play(@player.x,@player.y)
+    @explode.update
+
+    if @explode.anime_sprite_count  >= ((@explode_frames.size * @explode.anime_sprite_frame_count) - 1)
+      @explode_flag = false
+    end
+
+    @explode.draw if @explode_flag
+
+
+    #tokio pop condition....
+    # add_tokio(50,1)
+
+    if @enemy_count < Configure::MAX_ENEMY_NUMBER
+      add_enemies(50, 1) if ( rand(50) == 2 )
     end
 
   end
