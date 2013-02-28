@@ -53,7 +53,6 @@ class Director
   def check_collision
     #hit 
     if Sprite.check(@bullets, @enemies) || Sprite.check(@bullets, @boss)
-      @score.point += 1    
       #explode
       @explode.x = @bullets.last.x
       @explode.y = @bullets.last.y - 50
@@ -61,6 +60,10 @@ class Director
       @explode.flag = true     
       #score
       @score.point += 1
+    end
+    if Sprite.check(@bullets, @boss)
+      # Clear action
+      @score.clear
     end
   end
 
@@ -121,7 +124,7 @@ class Director
 
     # Apper boss
     Boss.add_boss(self, @score.point)
-    
+
   end
 
 end

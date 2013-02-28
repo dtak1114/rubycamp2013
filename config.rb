@@ -5,6 +5,7 @@ require "logger"
 class Configure
 
 	#LIFE and STAGE condition
+	GOAL_SCORE = 100
 	
 
 	#window
