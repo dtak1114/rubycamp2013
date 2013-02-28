@@ -7,10 +7,12 @@ class Director
 
     @score.map = self
 
-    #海岸の画像の設定
+    # 海岸の画像の設定
     @land = Sprite.new(Configure::LAND_IMG_X, Configure::LAND_IMG_Y, Image.load("./images/beach.jpg"))
-    #湖の画像の設定
+    # 湖の画像の設定
     @lake = Sprite.new(Configure::LAKE_IMG_X, Configure::LAKE_IMG_Y, Image.load("./images/lake.jpg"))
+    # score_backgroundの設定
+    @score_background = Sprite.new(Configure::SCORE_BACKGROUND_X, Configure::SCORE_BACKGROUND_Y, Image.new(80, 50, [150, 150, 110]))
 
     @damege_img = Image.load("./images/lake2.jpg")
     @death_img = Image.load("./images/lake3.jpg")
@@ -21,14 +23,17 @@ class Director
     @enemy_img.setColorKey([0, 0, 0])
     @bullet_img = Image.load("./images/bullet.png")
     @bullet_img.setColorKey([0, 0, 0])
+    @boss_img = Image.load("./images/boss.jpg")
+    @boss_img.setColorKey([0, 0, 0])
 
     @player = Player.new(Configure::PLAYER_INIT_X, Configure::PLAYER_INIT_Y, @player_img)
-    @player.director = self
 
     @enemies = []
     @enemy_count = 0
 
     @bullets = []
+    @boss = []
+  
   end
 
   def add_enemies(bounds_y, num = 10)
@@ -38,6 +43,10 @@ class Director
       @enemies << enemy
       @enemy_count += 1
     end
+  end
+
+  def add_boss
+    @boss << Boss.new(350, 200, @boss_img)    
   end
 
   def check_collision
@@ -63,6 +72,7 @@ class Director
     @map.draw
     @land.draw
     @lake.draw
+    @score_background.draw
     
     Sprite.update(@enemies)
     Sprite.draw(@enemies)
@@ -71,6 +81,10 @@ class Director
     Sprite.update(@bullets)
     Sprite.draw(@bullets)
     Sprite.clean(@bullets)
+
+    Sprite.update(@boss)
+    Sprite.draw(@boss)
+    Sprite.clean(@boss)
 
     Sprite.draw(@score)
 
@@ -88,6 +102,9 @@ class Director
     if @enemy_count < Configure::MAX_ENEMY_NUMBER
       add_enemies(50, 1) if ( rand(50) == 2 )
     end
+
+    # Apper boss
+    # add_boss
 
   end
 
