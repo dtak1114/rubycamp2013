@@ -41,6 +41,7 @@ class Director
 
     #SE
     @sound_fire = Sound.new("sound/explosion.wav")
+    @sound_airstrike = Sound.new("sound/airstrike.wav")
 
     @player = Player.new(Configure::PLAYER_INIT_X, Configure::PLAYER_INIT_Y, @player_img)
     #Player's position at the beggining of the game
@@ -119,7 +120,7 @@ class Director
     
     Bullet.fire(@bullets,@bullet_img,@player.x,@player.y,@player.angle,@sound_fire)
     Bomb.fire(@bombs,@fighters)
-    Airstrike.fire(@fighters)
+    Airstrike.fire(@fighters,@sound_airstrike)
 
     Enemy.increment_enemies(self, @enemies, @enemy_count, @score.point)
 
