@@ -1,6 +1,7 @@
 # coding: utf-8
 
 class Airstrike < Sprite
+
 	@@falcon_img = Image.load("./images/ff.png")
 	@@falcon_img.setColorKey([0,0,0])
 	@@bomb_img = Image.load("images/bomb1.jpg")
@@ -14,8 +15,9 @@ class Airstrike < Sprite
 		self.x -= Configure::FIGHTER_SPEED
 	end
 
-	def self.fire(fighters)
+	def self.fire(fighters,sound)
 		if Input.keyPush?(Configure::KEY_AIRSTRIKE)
+			sound.play
       new_fighter = Airstrike.new()
   		return fighters << new_fighter 
 		end
