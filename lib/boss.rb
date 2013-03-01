@@ -3,8 +3,7 @@
 class Boss < Sprite
   @@tokio_d_img = Image.load("./images/tokio_d.png")
   @@tokio_d_img.setColorKey([0, 0, 0])
-  @hit_sound = Sound.new("sound/se_mod05.wav")
-
+  @@boss_sound = Sound.new("sound/se_mod05.wav")
   attr_accessor :stopped, :director
   def initialize( x=0, y=0, image=nil) 
     super
@@ -32,7 +31,7 @@ class Boss < Sprite
   end
 
   def hit(obj)
-    @hit_sound.play
+    @@boss_sound.play
     @hp -= 1
     if @hp < (Configure::BOSS_HP / 3)
       self.image = @@tokio_d_img
