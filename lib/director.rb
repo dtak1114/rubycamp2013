@@ -1,5 +1,5 @@
 ﻿# coding: utf-8
-require 'pp'
+
 class Director
   attr_reader :enemy_img, :boss_img
   attr_accessor :enemies, :enemy_count, :boss
