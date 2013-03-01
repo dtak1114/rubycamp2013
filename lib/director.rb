@@ -76,7 +76,7 @@ class Director
     end
     if Sprite.check(@bombs, @enemies)
       #explode
-     @explode.x = @enemies.last.x
+      @explode.x = @enemies.last.x
       @explode.y = (@enemies.last.y - 50)
       @explode.start_animation(:anime1) 
       @explode.flag = true     

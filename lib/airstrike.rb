@@ -30,6 +30,9 @@ class Bomb < Airstrike
 
 	def update
 		self.y += Configure::BOMB_FALLDOWN_SPEED
+		if self.y >= Window.height - self.image.height
+      		@vanished = true
+    	end
 	end
 
 	def self.fire(bombs,fighters)
