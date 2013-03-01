@@ -58,7 +58,7 @@ class Director
     @pants = []
     @fighters = []
     @bombs =[]
-    @time = Time.new + 30
+    @time = Time.new + 60
   end
 
   def check_collision
